@@ -1,10 +1,11 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Menu, X } from 'lucide-react'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { LogIn, Menu, X } from 'lucide-react'
+import { Session } from 'next-auth'
 import Link from 'next/link'
 import { useState } from 'react'
-import { Sheet, SheetContent, SheetTrigger } from '../ui'
 
 const menuItems = [
 	{ href: '/', label: 'Home' },
@@ -12,11 +13,14 @@ const menuItems = [
 	{ href: '/services', label: 'Services' },
 	{ href: '/contact', label: 'Contact' }
 ]
+interface NavigationProps {
+	user: Session
+}
 
-export default function Navigation() {
+export const Navigation = ({ user }: NavigationProps) => {
 	const [isOpen, setIsOpen] = useState(false)
 
-	const toggleMenu = () => setIsOpen(!isOpen)
+	console.log('user', user)
 
 	const MenuItems = () => (
 		<>
@@ -50,6 +54,9 @@ export default function Navigation() {
 						<ul className="flex space-x-2">
 							<MenuItems />
 						</ul>
+						<Button variant="outline" size="sm" className="ml-4">
+							<LogIn className="mr-2 h-4 w-4" /> Login
+						</Button>
 					</div>
 					{/* Mobile menu button */}
 					<div className="md:hidden flex items-center">
@@ -74,6 +81,12 @@ export default function Navigation() {
 									<ul className="flex flex-col space-y-4 mt-8">
 										<MenuItems />
 									</ul>
+									<div className="mt-auto pb-6">
+										<Button className="w-full">
+											{/* <LogIn className="mr-2 h-4 w-4" /> Login */}
+											{}
+										</Button>
+									</div>
 								</nav>
 							</SheetContent>
 						</Sheet>

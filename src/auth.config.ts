@@ -7,13 +7,18 @@ export const authConfig = {
 	providers: [],
 	callbacks: {
 		authorized({ auth, request: { nextUrl } }) {
+			// console.log('auth', auth)
+			// console.log('nextUrl', nextUrl)
+
 			const isLoggedIn = !!auth?.user
-			const isOnDashboard = nextUrl.pathname.startsWith('/dashboard')
+			console.log('auth?.user', auth?.user)
+
+			const isOnDashboard = nextUrl.pathname.startsWith('/streaming')
 			if (isOnDashboard) {
 				if (isLoggedIn) return true
 				return false
 			} else if (isLoggedIn) {
-				return Response.redirect(new URL('/dashboard', nextUrl))
+				return Response.redirect(new URL('/streaming', nextUrl))
 			}
 			return true
 		}
