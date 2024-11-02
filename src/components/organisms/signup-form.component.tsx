@@ -3,11 +3,13 @@
 import { lusitana } from '@/app/fonts/fonts'
 import { TextField } from '@/components/molecules'
 import { Button, Form } from '@/components/ui'
+import { register } from '@/lib/auth'
 import { signupFormSchema, SignupFormType } from '@/schemas/signup-form.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ArrowRightIcon, AtSign, UserIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 
 export const SignUpForm = () => {
 	const form = useForm<SignupFormType>({
@@ -23,7 +25,14 @@ export const SignUpForm = () => {
 
 	const { handleSubmit, control, reset } = form
 	const onSubmit = async (data: SignupFormType) => {
-		console.log(data)
+		const error = await register(data)
+
+		if (!!error) {
+			toast.error(error)
+			return
+		}
+
+		reset()
 	}
 
 	return (
