@@ -1,11 +1,13 @@
 'use client'
 
 import { lusitana } from '@/app/fonts/fonts'
+import { authenticate } from '@/lib/auth'
 import { SignInFormSchema, SignInFormType } from '@/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ArrowRightIcon, AtSign, KeyRoundIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { TextField } from '../molecules'
 import { Form } from '../ui'
 import { Button } from '../ui/button'
@@ -21,8 +23,20 @@ export const SignInForm = () => {
 	})
 
 	const { handleSubmit, control, reset } = form
+
 	const onSubmit = async (data: SignInFormType) => {
-		console.log(data)
+		const formData = new FormData()
+		formData.append('email', data.email)
+		formData.append('password', data.password)
+
+		const error = await authenticate(undefined, formData)
+
+		if (error) {
+			toast.error(error)
+			return
+		}
+
+		reset()
 	}
 
 	return (
@@ -52,7 +66,7 @@ export const SignInForm = () => {
 					</div>
 
 					<Button className="mt-4 w-full" aria-disabled={true}>
-						Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+						Sign in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
 					</Button>
 
 					<div className="mt-4 text-center text-sm text-gray-600">
@@ -60,15 +74,6 @@ export const SignInForm = () => {
 						<Link href="/signup" className="text-blue-600 hover:underline">
 							Create one here
 						</Link>
-					</div>
-
-					<div className="flex h-8 items-end space-x-1" aria-live="polite" aria-atomic="true">
-						{/* {errorMessage && (
-            <>
-              <ExclamationTriangleIcon className="h-5 w-5 text-red-500" />
-              <p className="text-sm text-red-500">{errorMessage}</p>
-            </>
-          )} */}
 					</div>
 				</div>
 			</form>

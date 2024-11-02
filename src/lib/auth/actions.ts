@@ -118,8 +118,7 @@ export async function authenticate(prevState: string | undefined, formData: Form
 	console.log('formData', formData)
 
 	try {
-		const result = await signIn('credentials', formData)
-		console.log('result', result)
+		await signIn('credentials', formData)
 	} catch (error) {
 		if (error instanceof AuthError) {
 			switch (error.type) {

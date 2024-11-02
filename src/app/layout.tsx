@@ -1,7 +1,9 @@
 import { Footer } from '@/components/globals'
 import Navigation from '@/components/globals/menu'
+import { ToastProvider } from '@/components/ui'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import { Toaster } from 'sonner'
 import './globals.css'
 
 const geistSans = localFont({
@@ -28,9 +30,12 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-				<Navigation />
-				{children}
-				<Footer />
+				<ToastProvider>
+					<Navigation />
+					{children}
+					<Footer />
+					<Toaster />
+				</ToastProvider>
 			</body>
 		</html>
 	)
