@@ -2,10 +2,12 @@
 
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { LogIn, Menu, X } from 'lucide-react'
+import { signOut } from '@/lib/auth'
+import { LogIn, LogOut, Menu, X } from 'lucide-react'
 import { Session } from 'next-auth'
 import Link from 'next/link'
 import { useState } from 'react'
+import { Typography } from '../molecules'
 
 const menuItems = [
 	{ href: '/', label: 'Home' },
@@ -14,13 +16,11 @@ const menuItems = [
 	{ href: '/contact', label: 'Contact' }
 ]
 interface NavigationProps {
-	user: Session
+	session: Session
 }
 
-export const Navigation = ({ user }: NavigationProps) => {
+export const Navigation = ({ session }: NavigationProps) => {
 	const [isOpen, setIsOpen] = useState(false)
-
-	console.log('user', user)
 
 	const MenuItems = () => (
 		<>
@@ -55,7 +55,17 @@ export const Navigation = ({ user }: NavigationProps) => {
 							<MenuItems />
 						</ul>
 						<Button variant="outline" size="sm" className="ml-4">
-							<LogIn className="mr-2 h-4 w-4" /> Login
+							{!!session?.user ? (
+								<div className="flex items-center" onClick={async () => await signOut()}>
+									<LogOut className="mr-2 h-4 w-4" />
+									<Typography as="p">Log Out</Typography>
+								</div>
+							) : (
+								<div className="flex items-center">
+									<LogIn className="mr-2 h-4 w-4" />
+									Log In
+								</div>
+							)}
 						</Button>
 					</div>
 					{/* Mobile menu button */}
@@ -82,10 +92,17 @@ export const Navigation = ({ user }: NavigationProps) => {
 										<MenuItems />
 									</ul>
 									<div className="mt-auto pb-6">
-										<Button className="w-full">
-											{/* <LogIn className="mr-2 h-4 w-4" /> Login */}
-											{}
-										</Button>
+										{!!session?.user ? (
+											<div className="flex items-center" onClick={async () => await signOut()}>
+												<LogOut className="mr-2 h-4 w-4" />
+												<Typography as="p">Log Out</Typography>
+											</div>
+										) : (
+											<div className="flex items-center">
+												<LogIn className="mr-2 h-4 w-4" />
+												Log In
+											</div>
+										)}
 									</div>
 								</nav>
 							</SheetContent>

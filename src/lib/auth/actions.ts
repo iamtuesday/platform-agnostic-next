@@ -6,7 +6,7 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 import { AuthError } from 'next-auth'
-import { signIn } from '../../auth'
+import { signOut as _signOut, signIn } from '../../auth'
 
 const FormSchema = z.object({
 	id: z.string(),
@@ -130,4 +130,8 @@ export async function authenticate(prevState: string | undefined, formData: Form
 		}
 		throw error
 	}
+}
+
+export async function signOut() {
+	await _signOut()
 }

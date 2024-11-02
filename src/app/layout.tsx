@@ -28,13 +28,12 @@ export default async function RootLayout({
 	children: React.ReactNode
 }>) {
 	const session = await auth()
-	console.log('session', session)
 
 	return (
 		<html lang="en">
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 				<ToastProvider>
-					<Navigation user={session!} />
+					<Navigation session={session!} />
 					{children}
 					<Footer />
 					<Toaster />
