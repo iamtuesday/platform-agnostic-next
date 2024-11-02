@@ -5,7 +5,7 @@ import { TextField } from '@/components/molecules'
 import { Button, Form } from '@/components/ui'
 import { signupFormSchema, SignupFormType } from '@/schemas/signup-form.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ArrowRightIcon, AtSign, KeyRoundIcon, UserIcon } from 'lucide-react'
+import { ArrowRightIcon, AtSign, UserIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 
@@ -14,9 +14,9 @@ export const SignUpForm = () => {
 		resolver: zodResolver(signupFormSchema),
 		defaultValues: {
 			name: '',
-			email: '',
-			password: '',
-			confirmPassword: ''
+			email: ''
+			// password: '',
+			// confirmPassword: ''
 		},
 		mode: 'onBlur'
 	})
@@ -49,7 +49,7 @@ export const SignUpForm = () => {
 							placeholder="Enter your email address"
 							icon={<AtSign size={18} />}
 						/>
-
+						{/* 
 						<TextField
 							id="password"
 							type="password"
@@ -68,7 +68,7 @@ export const SignUpForm = () => {
 							name="confirmPassword"
 							placeholder="Confirm your password"
 							icon={<KeyRoundIcon size={18} />}
-						/>
+						/> */}
 					</div>
 
 					<Button type="submit" className="mt-4 w-full">

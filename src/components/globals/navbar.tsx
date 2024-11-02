@@ -3,11 +3,11 @@
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { signOut } from '@/lib/auth'
-import { LogIn, LogOut, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { Session } from 'next-auth'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { Typography } from '../molecules'
 
 const menuItems = [
 	{ href: '/', label: 'Home' },
@@ -16,11 +16,17 @@ const menuItems = [
 	{ href: '/contact', label: 'Contact' }
 ]
 interface NavigationProps {
-	session: Session
+	session: Session | null
 }
 
 export const Navigation = ({ session }: NavigationProps) => {
 	const [isOpen, setIsOpen] = useState(false)
+	const router = useRouter()
+	// const session = useSession()
+
+	const redirectToLogin = () => {
+		router.push('/signin')
+	}
 
 	const MenuItems = () => (
 		<>
@@ -49,26 +55,16 @@ export const Navigation = ({ session }: NavigationProps) => {
 							</Link>
 						</div>
 					</div>
-					{/* Desktop menu */}
 					<div className="hidden md:flex items-center space-x-1">
 						<ul className="flex space-x-2">
 							<MenuItems />
 						</ul>
-						<Button variant="outline" size="sm" className="ml-4">
-							{!!session?.user ? (
-								<div className="flex items-center" onClick={async () => await signOut()}>
-									<LogOut className="mr-2 h-4 w-4" />
-									<Typography as="p">Log Out</Typography>
-								</div>
-							) : (
-								<div className="flex items-center">
-									<LogIn className="mr-2 h-4 w-4" />
-									Log In
-								</div>
-							)}
-						</Button>
+						{!!session?.user ? (
+							<Button onClick={async () => await signOut()}>Log Out</Button>
+						) : (
+							<Button onClick={() => redirectToLogin()}>Sign In</Button>
+						)}
 					</div>
-					{/* Mobile menu button */}
 					<div className="md:hidden flex items-center">
 						<Sheet open={isOpen} onOpenChange={setIsOpen}>
 							<SheetTrigger asChild>
@@ -93,15 +89,9 @@ export const Navigation = ({ session }: NavigationProps) => {
 									</ul>
 									<div className="mt-auto pb-6">
 										{!!session?.user ? (
-											<div className="flex items-center" onClick={async () => await signOut()}>
-												<LogOut className="mr-2 h-4 w-4" />
-												<Typography as="p">Log Out</Typography>
-											</div>
+											<Button onClick={async () => await signOut()}>Log Out</Button>
 										) : (
-											<div className="flex items-center">
-												<LogIn className="mr-2 h-4 w-4" />
-												Log In
-											</div>
+											<Button onClick={() => redirectToLogin()}>Sign In</Button>
 										)}
 									</div>
 								</nav>

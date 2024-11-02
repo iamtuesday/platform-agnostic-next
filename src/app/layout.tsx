@@ -2,6 +2,7 @@ import { auth } from '@/auth'
 import { Footer, Navigation } from '@/components/globals'
 import { ToastProvider } from '@/components/ui'
 import type { Metadata } from 'next'
+import { SessionProvider } from 'next-auth/react'
 import localFont from 'next/font/local'
 import { Toaster } from 'sonner'
 import './globals.css'
@@ -33,10 +34,12 @@ export default async function RootLayout({
 		<html lang="en">
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 				<ToastProvider>
-					<Navigation session={session!} />
-					{children}
-					<Footer />
-					<Toaster />
+					<SessionProvider>
+						<Navigation session={session} />
+						{children}
+						<Footer />
+						<Toaster />
+					</SessionProvider>
 				</ToastProvider>
 			</body>
 		</html>

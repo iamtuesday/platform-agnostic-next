@@ -4,7 +4,7 @@ import { lusitana } from '@/app/fonts/fonts'
 import { authenticate } from '@/lib/auth'
 import { SignInFormSchema, SignInFormType } from '@/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ArrowRightIcon, AtSign, KeyRoundIcon } from 'lucide-react'
+import { ArrowRightIcon, AtSign } from 'lucide-react'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -16,8 +16,8 @@ export const SignInForm = () => {
 	const form = useForm<SignInFormType>({
 		resolver: zodResolver(SignInFormSchema),
 		defaultValues: {
-			email: '',
-			password: ''
+			email: ''
+			// password: ''
 		},
 		mode: 'onBlur'
 	})
@@ -27,7 +27,7 @@ export const SignInForm = () => {
 	const onSubmit = async (data: SignInFormType) => {
 		const formData = new FormData()
 		formData.append('email', data.email)
-		formData.append('password', data.password)
+		// formData.append('password', data.password)
 
 		const error = await authenticate(undefined, formData)
 
@@ -54,7 +54,7 @@ export const SignInForm = () => {
 							icon={<AtSign size={18} />}
 						/>
 
-						<TextField
+						{/* <TextField
 							id="password"
 							type="password"
 							label="Password"
@@ -62,7 +62,7 @@ export const SignInForm = () => {
 							name="password"
 							placeholder="Enter password"
 							icon={<KeyRoundIcon size={18} />}
-						/>
+						/> */}
 					</div>
 
 					<Button className="mt-4 w-full" aria-disabled={true}>
