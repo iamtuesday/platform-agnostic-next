@@ -1,8 +1,8 @@
+import { lusitana } from '@/app/fonts/fonts'
 import { Typography } from '@/components/molecules'
 import { VideoCard } from '@/components/molecules/video-card.component'
 import { Button } from '@/components/ui'
 import { cn } from '@/lib/utils'
-import { inter } from '../fonts/fonts'
 
 const arr = [
 	{
@@ -22,7 +22,7 @@ const arr = [
 	}
 ]
 
-export default async function VideosPage() {
+export const HomeVideosList = () => {
 	return (
 		<main className="min-h-screen bg-black py-10">
 			<div className="container space-y-10">
@@ -33,8 +33,11 @@ export default async function VideosPage() {
 						</Button>
 					</div>
 
-					<Typography as="h1" className={cn('text-white', inter.className)} size="5xl" weight="normal">
-						<span className="text-[#926EFF]">Descubre la IA </span>de la mano de los expertos
+					<Typography as="h1" className={cn('text-white', lusitana.className)} size="5xl" weight="normal">
+						<span className=" bg-gradient-to-t from-[#B28AF2] to-[#3B1FA5] bg-clip-text text-transparent">
+							Descubre la IA{' '}
+						</span>
+						de la mano de los expertos
 					</Typography>
 				</div>
 
