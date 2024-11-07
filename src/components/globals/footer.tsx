@@ -1,5 +1,7 @@
 import { Mail } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
+import logoUrl from '../../../public/assets/potencia-logo.svg'
 import { Separator } from '../ui/separator'
 
 export const Footer = () => {
@@ -8,19 +10,14 @@ export const Footer = () => {
 			<div className="max-w-6xl mx-auto px-4 py-6">
 				<div className="flex flex-col md:flex-row justify-between items-center">
 					<div className="flex flex-col items-center md:items-start mb-4 md:mb-0">
-						<div className="flex items-center mb-2">
-							<div className="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center mr-2">
-								<span className="text-white text-xl font-bold">CC</span>
-							</div>
-							<span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-600 text-transparent bg-clip-text">
-								Scoit Events
-							</span>
-						</div>
+						<figure className="mb-2">
+							<Image src={logoUrl} alt="Potencia Logo" width={160} height={60} />
+						</figure>
 						<div className="flex items-center mb-2">
 							<Mail className="w-4 h-4 mr-2 text-purple-400" />
-							<a href="contacot@potencia.com" className="hover:text-purple-400 transition-colors">
-								contacto@potencia.com
-							</a>
+							<Link href="mailto:potencia-logo.svg" className="hover:text-purple-400 transition-colors" target="_blank">
+								pottencia@lottus.com
+							</Link>
 						</div>
 					</div>
 				</div>
