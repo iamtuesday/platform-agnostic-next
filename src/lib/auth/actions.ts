@@ -2,6 +2,7 @@
 
 import { SignupFormType } from '@/schemas'
 import { AuthError } from 'next-auth'
+import { redirect } from 'next/navigation'
 import { signOut as _signOut, signIn } from '../../auth'
 import prisma from '../prisma/db'
 
@@ -10,12 +11,9 @@ export async function register({ email, name }: SignupFormType): Promise<void | 
 
 	if (Array.isArray(user) && user.length > 0) return 'Email already exists.'
 
-	console.log(name, email)
-
-	// await prisma.$executeRaw`INSERT INTO "User" (email, name) VALUES (${email}, ${name})`
 	await prisma.user.create({ data: { email, name } })
 
-	return undefined
+	redirect('/signin')
 }
 
 export async function authenticate(
@@ -24,7 +22,10 @@ export async function authenticate(
 ): Promise<'Invalid credentials.' | 'Something went wrong.' | undefined> {
 	try {
 		await signIn('credentials', formData)
+
+		redirect('/streaming')
 	} catch (error) {
+		console.error('Failed to authenticate:', error)
 		if (error instanceof AuthError) {
 			switch (error.type) {
 				case 'CredentialsSignin':
@@ -33,7 +34,8 @@ export async function authenticate(
 					return 'Something went wrong.'
 			}
 		}
-		throw error
+		// throw error
+		redirect('/streaming')
 	}
 }
 

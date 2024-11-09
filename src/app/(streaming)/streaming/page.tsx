@@ -2,7 +2,6 @@ import { inter } from '@/app/fonts/fonts'
 import { Typography } from '@/components/molecules'
 import { Mdx } from '@/components/ui'
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
 
 export default function StreamingPage() {
 	const iframeUrl = `<iframe
@@ -19,7 +18,7 @@ export default function StreamingPage() {
 
 	return (
 		<div className="flex flex-col bg-black relative">
-			<picture className="absolute inset-0 -z-10">
+			{/* <picture className="absolute inset-0 -z-10">
 				<source media="(min-width: 960px)" srcSet="/assets/2148054088.jpg" />
 				<source media="(min-width: 414px)" srcSet="/assets/2148054088.jpg" />
 				<Image
@@ -29,7 +28,7 @@ export default function StreamingPage() {
 					style={{ objectFit: 'cover' }}
 					quality={100}
 				/>
-			</picture>
+			</picture> */}
 
 			<main className="flex-grow container mx-auto py-20 space-y-4">
 				<Typography as="h1" className={cn(inter.className, 'text-white p-4 text-center')} size="4xl" weight="semibold">

@@ -14,9 +14,12 @@ export const authConfig = {
 				if (isLoggedIn) return true
 				return false
 			} else if (isLoggedIn) {
-				// return Response.redirect(new URL('/streaming', nextUrl))
 				const authRoutes = ['/streaming', '/videos', '/']
-				if (authRoutes.includes(nextUrl.pathname)) return true
+
+				if (authRoutes.includes(nextUrl.pathname)) {
+					return Response.redirect(new URL('/streaming', nextUrl))
+				}
+
 				return false
 			}
 			return true

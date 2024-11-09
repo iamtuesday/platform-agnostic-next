@@ -17,7 +17,6 @@ export const SignInForm = () => {
 		resolver: zodResolver(SignInFormSchema),
 		defaultValues: {
 			email: ''
-			// password: ''
 		},
 		mode: 'onBlur'
 	})
@@ -27,7 +26,6 @@ export const SignInForm = () => {
 	const onSubmit = async (data: SignInFormType) => {
 		const formData = new FormData()
 		formData.append('email', data.email)
-		// formData.append('password', data.password)
 
 		const error = await authenticate(undefined, formData)
 
@@ -53,16 +51,6 @@ export const SignInForm = () => {
 							placeholder="Enter your email address"
 							icon={<AtSign size={18} />}
 						/>
-
-						{/* <TextField
-							id="password"
-							type="password"
-							label="Password"
-							control={control}
-							name="password"
-							placeholder="Enter password"
-							icon={<KeyRoundIcon size={18} />}
-						/> */}
 					</div>
 
 					<Button className="mt-4 w-full" aria-disabled={true}>
