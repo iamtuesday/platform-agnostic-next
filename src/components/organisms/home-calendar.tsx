@@ -2,10 +2,11 @@
 
 import { lusitana } from '@/app/fonts/fonts'
 import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
-import { Typography } from './typography.component'
 
-export default function HomeCalendar() {
+import { cn } from '@/lib/utils'
+import { Typography } from '../molecules'
+
+export const HomeCalendar = () => {
 	return (
 		<div className="bg-black py-20">
 			<div className="container space-y-6 flex flex-col items-center">
@@ -15,7 +16,7 @@ export default function HomeCalendar() {
 						'text-center font-bold bg-gradient-to-t from-[#B28AF2] to-[#3B1FA5] bg-clip-text text-transparent',
 						lusitana.className
 					)}
-					size="7xl"
+					size="8xl"
 				>
 					28 Noviembre
 				</Typography>

@@ -1,4 +1,6 @@
 export * from './dashboard-section.component'
+export * from './home-banner'
+export * from './home-calendar'
 export * from './home-experience'
 export * from './home-location'
 export * from './home-schedules.component'
