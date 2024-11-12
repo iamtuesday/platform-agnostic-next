@@ -147,6 +147,7 @@ export function HomeSchedules() {
 						<Typography className="font-clash-grotesk text-white" size="5xl">
 							{'Jueves 28 de Noviembre'.split('').map((letter, index) => (
 								<motion.span
+									key={index}
 									variants={bluredFadeInAnimationVariants}
 									custom={index}
 									initial="initial"
