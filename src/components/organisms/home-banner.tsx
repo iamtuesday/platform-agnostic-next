@@ -5,7 +5,7 @@ import { Button } from '../ui'
 export const HomeBanner = () => {
 	return (
 		<section className="relative h-[800px] w-full">
-			<section className="absolute inset-0 z-10 px-2 text-white">
+			<section className="absolute inset-0 z-10 px-4 text-white laptop:px-0">
 				<header className="flex h-full flex-col items-center justify-center">
 					<Typography
 						as="h1"

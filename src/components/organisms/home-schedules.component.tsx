@@ -96,7 +96,7 @@ const schedules = [
 export function HomeSchedules() {
 	return (
 		<main className="mx-auto bg-black py-10 laptop:pb-20" id="agenda">
-			<div className="container mx-auto max-w-6xl space-y-12">
+			<div className="mx-auto max-w-6xl space-y-12 px-4 laptop:px-0">
 				<Typography
 					as="p"
 					className="bg-gradient-to-t from-[#B28AF2] to-[#3B1FA5] bg-clip-text uppercase text-transparent"

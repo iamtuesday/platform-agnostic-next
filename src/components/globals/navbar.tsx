@@ -62,7 +62,7 @@ export const Navigation = ({ session }: NavigationProps) => {
 				isOpen ? 'bg-foreground' : 'bg-black'
 			)}
 		>
-			<div className="relative mx-auto max-w-6xl px-4">
+			<div className="relative mx-auto max-w-6xl px-4 laptop:px-0">
 				<div
 					className={cn(
 						'flex items-center justify-between border-b border-transparent py-3 laptop:py-4',

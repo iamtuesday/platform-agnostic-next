@@ -1,4 +1,3 @@
-import { lusitana } from '@/app/fonts/fonts'
 import { Typography } from '@/components/molecules'
 import { VideoCard } from '@/components/molecules/video-card.component'
 import { Button } from '@/components/ui'
@@ -24,22 +23,22 @@ const arr = [
 
 export const HomeVideosList = () => {
 	return (
-		<main className="min-h-screen bg-black py-10">
-			<div className="container space-y-10">
-				<div className="flex flex-col gap-6 items-center">
+		<section className="min-h-screen bg-black py-20" id="videos">
+			<div className="mx-auto max-w-6xl space-y-10 px-4 laptop:px-0">
+				<header className="flex flex-col items-center gap-6">
 					<div>
 						<Button variant="unstyled" disabled>
 							Educación Continua
 						</Button>
 					</div>
 
-					<Typography as="h1" className={cn('text-white', lusitana.className)} size="5xl" weight="normal">
-						<span className=" bg-gradient-to-t from-[#B28AF2] to-[#3B1FA5] bg-clip-text text-transparent">
+					<Typography as="h1" className={cn('text-white')} size="5xl" weight="normal">
+						<span className="bg-gradient-to-t from-[#B28AF2] to-[#3B1FA5] bg-clip-text text-transparent">
 							Descubre la IA{' '}
 						</span>
 						de la mano de los expertos
 					</Typography>
-				</div>
+				</header>
 
 				<div className="grid grid-cols-1 gap-8 md:grid-cols-2">
 					{arr.map(item => (
@@ -47,6 +46,6 @@ export const HomeVideosList = () => {
 					))}
 				</div>
 			</div>
-		</main>
+		</section>
 	)
 }
