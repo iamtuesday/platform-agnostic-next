@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" fill="none">
+  <g clip-path="url(#clip0_248_144)">
+    <path d="M262.583 86.3779H303.377V414.622H262.583V86.3779Z" fill="white"></path>
+    <path d="M390.579 367.727H355.412L350.721 414.617H314.149L346.97 86.373H403.232L436.524 414.617H395.26L390.574 367.727H390.579ZM359.163 329.28H386.828L384.953 307.708C378.857 238.306 375.106 183.444 372.761 129.987C370.415 183.444 366.664 236.901 361.038 306.303L359.163 329.28Z" fill="white"></path>
+    <mask id="mask0_248_144" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="-677" y="77" width="1114" height="347">
+      <path d="M-590.262 77H-553.69L-640.427 424H-677L-590.262 77ZM262.583 86.378H303.376V414.622H262.583V86.378ZM390.579 367.727H355.412L350.721 414.617H314.149L346.97 86.373H403.232L436.524 414.617H395.26L390.574 367.727H390.579ZM359.163 329.28H386.828L384.953 307.708C378.857 238.306 375.106 183.444 372.761 129.987C370.415 183.444 366.664 236.901 361.038 306.303L359.163 329.28Z" fill="white"></path>
+    </mask>
+    <g mask="url(#mask0_248_144)">
+      <path d="M436.529 774.914C641.683 774.914 807.993 608.585 807.993 403.408C807.993 198.231 641.683 31.9016 436.529 31.9016C231.374 31.9016 65.0636 198.231 65.0636 403.408C65.0636 608.585 231.374 774.914 436.529 774.914Z" fill="url(#paint0_radial_248_144)"></path>
+    </g>
+    <path d="M166.504 77H203.077L116.339 424H79.7664L166.504 77Z" fill="white"></path>
+    <mask id="mask1_248_144" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="79" y="77" width="1115" height="347">
+      <path d="M166.504 77H203.077L116.339 424H79.7664L166.504 77ZM1019.35 86.378H1060.14V414.622H1019.35V86.378ZM1147.35 367.727H1112.18L1107.49 414.617H1070.92L1103.74 86.373H1160L1193.29 414.617H1152.03L1147.34 367.727H1147.35ZM1115.93 329.28H1143.59L1141.72 307.708C1135.62 238.306 1131.87 183.444 1129.53 129.987C1127.18 183.444 1123.43 236.901 1117.8 306.303L1115.93 329.28Z" fill="white"></path>
+    </mask>
+    <g mask="url(#mask1_248_144)">
+      <path d="M162.882 457.884C368.036 457.884 534.347 291.555 534.347 86.3778C534.347 -118.8 368.036 -285.129 162.882 -285.129C-42.2724 -285.129 -208.583 -118.8 -208.583 86.3778C-208.583 291.555 -42.2724 457.884 162.882 457.884Z" fill="url(#paint1_radial_248_144)"></path>
+    </g>
+  </g>
+  <defs>
+    <radialGradient id="paint0_radial_248_144" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(436.529 403.408) scale(371.465 371.506)">
+      <stop stop-color="#9600FB"></stop>
+      <stop offset="0.79" stop-color="#E8008F" stop-opacity="0.0484"></stop>
+      <stop offset="1" stop-color="#FF0072" stop-opacity="0"></stop>
+    </radialGradient>
+    <radialGradient id="paint1_radial_248_144" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(162.882 86.3778) scale(371.465 371.506)">
+      <stop stop-color="#9600FB"></stop>
+      <stop offset="0.79" stop-color="#E8008F" stop-opacity="0.0484"></stop>
+      <stop offset="1" stop-color="#FF0072" stop-opacity="0"></stop>
+    </radialGradient>
+    <clipPath id="clip0_248_144">
+      <rect width="500" height="500" fill="white"></rect>
+    </clipPath>
+  </defs>
+</svg>

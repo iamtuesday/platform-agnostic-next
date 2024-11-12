@@ -1,7 +1,9 @@
+import { cn } from '@/lib/utils'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Typography } from '../molecules'
-import { Button } from '../ui'
+import { buttonVariants } from '../ui'
 
 const sponsors = [
 	{
@@ -62,9 +64,12 @@ export const HomeBanner = () => {
 					necesarias para potenciar sus oportunidades académicas, laborales y de empleabilidad en el mundo actual.
 				</Typography>
 
-				<Button variant="secondary" size="lg" className="rounded-full text-base">
+				<Link
+					href="/streaming"
+					className={cn(buttonVariants({ variant: 'secondary', size: 'lg' }), 'rounded-full text-base')}
+				>
 					Ver transmisión en vivo <ArrowUpRight />
-				</Button>
+				</Link>
 
 				<footer className="mt-5 flex flex-col items-center gap-10">
 					<Image className="h-11 w-auto" src="/assets/logo-lottus.png" alt={'Logo Lottus'} width={750} height={500} />
