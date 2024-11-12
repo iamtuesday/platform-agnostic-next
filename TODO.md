@@ -1,5 +1,7 @@
 ## Sources
 
+- https://pottencia.com/
+- https://potenciascoit.framer.website/#home
 - https://authjs.dev/getting-started/migrating-to-v5#authenticating-server-side
 - https://nextjs.org/learn/dashboard-app/adding-authentication
 - https://nodejs.org/api/stream.html
