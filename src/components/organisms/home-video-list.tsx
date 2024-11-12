@@ -23,7 +23,7 @@ const arr = [
 
 export const HomeVideosList = () => {
 	return (
-		<section className="min-h-screen bg-black py-20" id="videos">
+		<section className="bg-black py-20" id="videos">
 			<div className="mx-auto max-w-6xl space-y-10 px-4 laptop:px-0">
 				<header className="flex flex-col items-center gap-6">
 					<div>
