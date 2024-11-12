@@ -19,6 +19,8 @@ const config: Config = {
 		extend: {
 			fontFamily: {
 				'dharma-gothic': ['var(--font-dharma-gothic)'],
+				'clash-grotesk': ['var(--font-clash-grotesk)'],
+				'plus-jakarta': ['var(--font-plus-jakarta)'],
 				inter: ['var(--font-inter)']
 			},
 			colors: {
