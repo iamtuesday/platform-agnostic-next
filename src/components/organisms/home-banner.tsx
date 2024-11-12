@@ -36,7 +36,7 @@ export const HomeBanner = () => {
 	return (
 		<section className="relative h-[1000px] w-full">
 			<section className="absolute inset-0 z-10 flex h-full flex-col items-center justify-center gap-10 px-4 text-white laptop:px-0">
-				<header>
+				<div className="motion-safe:animate-fade-in-up flex flex-col items-center gap-10 motion-safe:delay-1000">
 					<Typography
 						as="h1"
 						className="text-center font-dharma-gothic uppercase tracking-tight text-white [line-height:0.6_!important]"
@@ -57,19 +57,19 @@ export const HomeBanner = () => {
 							ia
 						</span>
 					</Typography>
-				</header>
 
-				<Typography className="mt-2 text-center font-inter text-white" size="xl" weight="medium">
-					Pottencia de Lottus Education es un programa innovador diseñado para dar a los estudiantes las herramientas
-					necesarias para potenciar sus oportunidades académicas, laborales y de empleabilidad en el mundo actual.
-				</Typography>
+					<Typography className="mt-2 text-center font-inter text-white" size="xl" weight="medium">
+						Pottencia de Lottus Education es un programa innovador diseñado para dar a los estudiantes las herramientas
+						necesarias para potenciar sus oportunidades académicas, laborales y de empleabilidad en el mundo actual.
+					</Typography>
 
-				<Link
-					href="/streaming"
-					className={cn(buttonVariants({ variant: 'secondary', size: 'lg' }), 'rounded-full text-base')}
-				>
-					Ver transmisión en vivo <ArrowUpRight />
-				</Link>
+					<Link
+						href="/streaming"
+						className={cn(buttonVariants({ variant: 'secondary', size: 'lg' }), 'rounded-full text-base')}
+					>
+						Ver transmisión en vivo <ArrowUpRight />
+					</Link>
+				</div>
 
 				<footer className="mt-8 flex flex-col items-center gap-14">
 					<Image className="h-11 w-auto" src="/assets/logo-lottus.png" alt={'Logo Lottus'} width={750} height={500} />

@@ -1,3 +1,7 @@
+'use client'
+
+import { cn } from '@/lib/utils'
+import { motion } from 'motion/react'
 import { Typography } from '../molecules'
 
 const schedules = [
@@ -93,6 +97,39 @@ const schedules = [
 	}
 ]
 
+const fadeInUpAnimationVariants = {
+	initial: {
+		opacity: 0,
+		y: 50
+	},
+	animate: (index: number) => {
+		return {
+			opacity: 1,
+			y: 0,
+			transition: {
+				duration: 0.3,
+				delay: 0.01 * index
+			}
+		}
+	}
+}
+
+const bluredFadeInAnimationVariants = {
+	initial: {
+		filter: 'blur(5px)',
+		opacity: 0
+	},
+	animate: (index: number) => {
+		return {
+			opacity: 1,
+			filter: 'blur(0px)',
+			transition: {
+				delay: 0.03 * index
+			}
+		}
+	}
+}
+
 export function HomeSchedules() {
 	return (
 		<main className="mx-auto bg-black py-10 laptop:pb-20" id="agenda">
@@ -108,16 +145,35 @@ export function HomeSchedules() {
 				<section className="space-y-12">
 					<header>
 						<Typography className="font-clash-grotesk text-white" size="5xl">
-							Jueves 28 de Noviembre
+							{'Jueves 28 de Noviembre'.split('').map((letter, index) => (
+								<motion.span
+									variants={bluredFadeInAnimationVariants}
+									custom={index}
+									initial="initial"
+									whileInView="animate"
+									viewport={{
+										once: true
+									}}
+								>
+									{letter}
+								</motion.span>
+							))}{' '}
 						</Typography>
 					</header>
 
 					<section className="flex flex-col gap-16">
-						{schedules.map(schedule => {
+						{schedules.map((schedule, index) => {
 							return (
-								<div
+								<motion.div
 									key={schedule.id}
-									className="grid grid-cols-1 items-center gap-y-4 laptop:grid-cols-[360px_auto] laptop:px-20"
+									variants={fadeInUpAnimationVariants}
+									custom={index}
+									viewport={{
+										once: true
+									}}
+									initial="initial"
+									whileInView="animate"
+									className={cn('grid grid-cols-1 items-center gap-y-4 laptop:grid-cols-[360px_auto] laptop:px-20')}
 								>
 									<Typography as="p" className="text-white" size="3xl" weight="bold">
 										{schedule.schedule}
@@ -131,7 +187,7 @@ export function HomeSchedules() {
 											{schedule.description}
 										</Typography>
 									</div>
-								</div>
+								</motion.div>
 							)
 						})}
 					</section>

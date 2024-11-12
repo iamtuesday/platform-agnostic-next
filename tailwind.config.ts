@@ -87,6 +87,16 @@ const config: Config = {
 						opacity: '1'
 					}
 				},
+				'fade-in-up': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(40px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
 				'fade-in-right': {
 					'0%': {
 						opacity: '0',
@@ -99,6 +109,7 @@ const config: Config = {
 				}
 			},
 			animation: {
+				'fade-in-up': 'fade-in-up 0.6s ease-in-out',
 				'fade-in-right': 'fade-in-right 0.6s ease-in-out',
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
