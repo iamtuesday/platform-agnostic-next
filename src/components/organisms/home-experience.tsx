@@ -29,7 +29,7 @@ export default function HomeExperience() {
 					</header>
 
 					<footer className="inline-block">
-						<Button variant="default" size="lg">
+						<Button variant="default" size="lg" className="text-base">
 							Videos Feed
 						</Button>
 					</footer>

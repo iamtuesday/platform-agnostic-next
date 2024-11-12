@@ -1,7 +1,7 @@
-import { inter } from '@/app/fonts/fonts'
 import { Typography } from '@/components/molecules'
 import { Mdx } from '@/components/ui'
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
 
 export default function StreamingPage() {
 	const iframeUrl = `<iframe
@@ -17,25 +17,35 @@ export default function StreamingPage() {
 	const iframeUrlFormat = iframeUrl.replace(/<iframe/gi, `<iframe className="absolute top-0 left-0 w-full h-full"`)!
 
 	return (
-		<div className="flex flex-col bg-black relative">
-			{/* <picture className="absolute inset-0 -z-10">
-				<source media="(min-width: 960px)" srcSet="/assets/2148054088.jpg" />
-				<source media="(min-width: 414px)" srcSet="/assets/2148054088.jpg" />
-				<Image
-					src="/assets/2148054428.jpg"
-					alt="Responsive background image"
-					layout="fill"
-					style={{ objectFit: 'cover' }}
-					quality={100}
-				/>
-			</picture> */}
+		<div className="relative flex flex-col bg-black pb-16">
+			<Image
+				src="/assets/pottencia-dark-bg.avif"
+				alt="Responsive background image"
+				className="object-cover"
+				layout="fill"
+			/>
+			<div
+				className="absolute left-0 right-0 top-0 h-[40%]"
+				style={{
+					background: 'linear-gradient(180deg,#000000 0%,rgba(0,0,0,0) 100%)'
+				}}
+			></div>
+			<div className="absolute top-0 h-full w-full bg-[#000000d9]" />
+			<div
+				className="absolute bottom-0 left-0 right-0 h-[40%]"
+				style={{
+					background: 'linear-gradient(180deg,rgba(0,0,0,0) 0%,rgb(0,0,0) 100%)'
+				}}
+			></div>
 
-			<main className="flex-grow container mx-auto py-20 space-y-4">
-				<Typography as="h1" className={cn(inter.className, 'text-white p-4 text-center')} size="4xl" weight="semibold">
-					Conferencia Magistral en Vivo
-				</Typography>
+			<main className="relative z-30 mx-auto w-full max-w-6xl space-y-6 px-4 py-10 laptop:px-0">
+				<header>
+					<Typography as="h1" className={cn('text-center text-white')} size="4xl" weight="semibold">
+						Conferencia Magistral en Vivo
+					</Typography>
+				</header>
 
-				<div className="bg-black rounded-lg overflow-hidden shadow-lg">
+				<div className="overflow-hidden rounded-lg bg-black shadow-lg">
 					<div className="relative pt-[56.25%]">
 						<Mdx>{iframeUrlFormat}</Mdx>
 					</div>
