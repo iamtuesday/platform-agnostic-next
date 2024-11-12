@@ -39,3 +39,8 @@
 ### npx prisma db push
 
 npx prisma studio
+
+- [x] cargar la fuentes
+- [x] actualizar home-banner
+- [x] actualizar el navbar en desktop y mobile
+- [] actulizar los estilos del agenda
