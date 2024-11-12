@@ -1,19 +1,20 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { signOut } from '@/lib/auth'
-import { Menu, X } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import { AlignLeft } from 'lucide-react'
 import { Session } from 'next-auth'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { PottenciaLogo } from './pottencia-logo'
 
 const menuItems = [
-	{ href: '/', label: 'Home' },
-	{ href: '/about', label: 'About' },
-	{ href: '/services', label: 'Services' },
-	{ href: '/contact', label: 'Contact' }
+	{ href: '/#agenda', label: 'Agenda' },
+	{ href: '/#mapa', label: 'Mapa' },
+	{ href: '/#videos', label: 'Videos' },
+	{ href: '/red-social', label: 'Red Social' }
 ]
 interface NavigationProps {
 	session: Session | null
@@ -34,7 +35,8 @@ export const Navigation = ({ session }: NavigationProps) => {
 				<li key={item.href}>
 					<Link
 						href={item.href}
-						className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+						className="text-white transition-colors hover:text-white/50"
+						// className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900"
 						onClick={() => setIsOpen(false)}
 					>
 						{item.label}
@@ -44,62 +46,86 @@ export const Navigation = ({ session }: NavigationProps) => {
 		</>
 	)
 
+	const LiveButton = () => (
+		<Link
+			href="/streaming"
+			className="block w-max rounded-full bg-[#f50000] px-6 text-lg font-semibold uppercase text-white"
+		>
+			Live
+		</Link>
+	)
+
 	return (
-		<nav className="bg-white shadow-lg">
-			<div className="max-w-6xl mx-auto px-4">
-				<div className="flex justify-between">
-					<div className="flex space-x-7">
-						<div>
-							<Link href="/" className="flex items-center py-4 px-2">
-								<span className="font-semibold text-gray-500 text-lg">Logo</span>
-							</Link>
-						</div>
-					</div>
-					<div className="hidden md:flex items-center space-x-1">
-						<ul className="flex space-x-2">
+		<nav
+			className={cn(
+				'sticky top-0 z-50 shadow-lg transition-colors duration-300',
+				isOpen ? 'bg-foreground' : 'bg-black'
+			)}
+		>
+			<div className="relative mx-auto max-w-6xl px-4">
+				<div
+					className={cn(
+						'flex items-center justify-between border-b border-transparent py-3 laptop:py-4',
+						isOpen ? 'border-b border-[#333]' : ''
+					)}
+				>
+					<header className="flex space-x-7">
+						<Link href="/" className="flex items-center">
+							<PottenciaLogo className="max-w-[150px]" />
+						</Link>
+					</header>
+
+					<section className="hidden items-center space-x-1 md:flex">
+						<ul className="flex items-center gap-x-[32px]">
+							<li>
+								<LiveButton />
+							</li>
+
 							<MenuItems />
+
+							<li>
+								{/* auth buttons */}
+								{!!session?.user ? (
+									<Button onClick={async () => await signOut()}>Log Out</Button>
+								) : (
+									<Button onClick={() => redirectToLogin()}>Sign In</Button>
+								)}
+							</li>
 						</ul>
-						{!!session?.user ? (
-							<Button onClick={async () => await signOut()}>Log Out</Button>
-						) : (
-							<Button onClick={() => redirectToLogin()}>Sign In</Button>
-						)}
-					</div>
-					<div className="md:hidden flex items-center">
-						<Sheet open={isOpen} onOpenChange={setIsOpen}>
-							<SheetTrigger asChild>
-								<Button
-									variant="ghost"
-									size="icon"
-									className="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600"
-								>
-									<Menu className="h-6 w-6" />
-								</Button>
-							</SheetTrigger>
-							<SheetContent side="right" className="w-[300px] sm:w-[400px]">
-								<nav className="flex flex-col h-full">
-									<div className="flex items-center justify-between py-4 border-b">
-										<span className="font-semibold text-gray-500 text-lg">Menu</span>
-										<Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
-											<X className="h-6 w-6" />
-										</Button>
-									</div>
-									<ul className="flex flex-col space-y-4 mt-8">
-										<MenuItems />
-									</ul>
-									<div className="mt-auto pb-6">
-										{!!session?.user ? (
-											<Button onClick={async () => await signOut()}>Log Out</Button>
-										) : (
-											<Button onClick={() => redirectToLogin()}>Sign In</Button>
-										)}
-									</div>
-								</nav>
-							</SheetContent>
-						</Sheet>
-					</div>
+					</section>
+
+					{/* Sheet open */}
+					<button className="text-white md:hidden" onClick={() => setIsOpen(!isOpen)}>
+						<AlignLeft size="26" />
+					</button>
 				</div>
 			</div>
+
+			{/* Sheet */}
+			<section
+				className={cn(
+					isOpen ? 'h-[350px]' : 'h-0',
+					'absolute z-10 max-h-max w-full overflow-hidden border-b border-[#333] bg-foreground text-white transition-[height] duration-200 md:hidden'
+				)}
+			>
+				<nav className="flex flex-col px-4 py-8">
+					<ul className="flex flex-col space-y-6">
+						<li>
+							<LiveButton />
+						</li>
+
+						<MenuItems />
+
+						<li>
+							{!!session?.user ? (
+								<Button onClick={async () => await signOut()}>Log Out</Button>
+							) : (
+								<Button onClick={() => redirectToLogin()}>Sign In</Button>
+							)}
+						</li>
+					</ul>
+				</nav>
+			</section>
 		</nav>
 	)
 }
