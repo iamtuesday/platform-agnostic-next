@@ -1,8 +1,9 @@
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
+import Link from 'next/link'
 import imageUrl from '../../../public/assets/potencia-img-experience.png'
 import { Typography } from '../molecules'
-import { Button } from '../ui'
+import { buttonVariants } from '../ui'
 
 export default function HomeExperience() {
 	return (
@@ -29,9 +30,12 @@ export default function HomeExperience() {
 					</header>
 
 					<footer className="inline-block">
-						<Button variant="default" size="lg" className="text-base">
+						<Link
+							href="/red-social"
+							className={cn(buttonVariants({ size: 'lg' }), 'pointer-events-none bg-foreground/50 text-base')}
+						>
 							Videos Feed
-						</Button>
+						</Link>
 					</footer>
 				</section>
 			</div>

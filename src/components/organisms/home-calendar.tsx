@@ -22,7 +22,7 @@ export const HomeCalendar = () => {
 				</Typography>
 
 				<div className="inline-block">
-					<Button variant="outline" size="lg">
+					<Button variant="outline" size="lg" className="pointer-events-none bg-white/50">
 						Añadir al Calendario
 					</Button>
 				</div>
