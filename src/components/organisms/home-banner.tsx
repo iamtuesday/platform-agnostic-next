@@ -72,7 +72,13 @@ export const HomeBanner = () => {
 				</div>
 
 				<footer className="mt-8 flex flex-col items-center gap-14">
-					<Image className="h-11 w-auto" src="/assets/logo-lottus.png" alt={'Logo Lottus'} width={750} height={500} />
+					<Image
+						className="aspect-[193/44] h-11 w-auto"
+						src="/assets/logo-lottus.webp"
+						alt={'Logo Lottus'}
+						width={750}
+						height={500}
+					/>
 
 					<div className="flex flex-wrap justify-around gap-10">
 						{sponsors.map(sponsor => {
