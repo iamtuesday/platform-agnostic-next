@@ -34,7 +34,7 @@ const sponsors = [
 
 export const HomeBanner = () => {
 	return (
-		<section className="relative h-[800px] w-full">
+		<section className="relative h-[1000px] w-full">
 			<section className="absolute inset-0 z-10 flex h-full flex-col items-center justify-center gap-10 px-4 text-white laptop:px-0">
 				<header>
 					<Typography
@@ -71,7 +71,7 @@ export const HomeBanner = () => {
 					Ver transmisión en vivo <ArrowUpRight />
 				</Link>
 
-				<footer className="mt-5 flex flex-col items-center gap-10">
+				<footer className="mt-8 flex flex-col items-center gap-14">
 					<Image className="h-11 w-auto" src="/assets/logo-lottus.png" alt={'Logo Lottus'} width={750} height={500} />
 
 					<div className="flex flex-wrap justify-around gap-10">
@@ -79,7 +79,7 @@ export const HomeBanner = () => {
 							return (
 								<Image
 									key={sponsor.title}
-									className="h-8 w-auto"
+									className="aspect-auto h-8 w-auto object-contain"
 									src={sponsor.logo}
 									alt={sponsor.title}
 									width={750}
