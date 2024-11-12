@@ -3,19 +3,33 @@ import { Footer, Navigation } from '@/components/globals'
 import { ToastProvider } from '@/components/ui'
 import type { Metadata } from 'next'
 import { SessionProvider } from 'next-auth/react'
+import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import { Toaster } from 'sonner'
 import './globals.css'
 
-const geistSans = localFont({
-	src: './fonts/GeistVF.woff',
-	variable: '--font-geist-sans',
-	weight: '100 900'
+// const geistSans = localFont({
+// 	src: './fonts/GeistVF.woff',
+// 	variable: '--font-geist-sans',
+// 	weight: '100 900'
+// })
+// const geistMono = localFont({
+// 	src: './fonts/GeistMonoVF.woff',
+// 	variable: '--font-geist-mono',
+// 	weight: '100 900'
+// })
+
+const inter = Inter({
+	weight: '400',
+	subsets: ['latin'],
+	display: 'swap',
+	variable: '--font-inter'
 })
-const geistMono = localFont({
-	src: './fonts/GeistMonoVF.woff',
-	variable: '--font-geist-mono',
-	weight: '100 900'
+
+const dharmaGothic = localFont({
+	src: './fonts/DharmaGothic.woff2',
+	variable: '--font-dharma-gothic',
+	weight: '400'
 })
 
 export const metadata: Metadata = {
@@ -32,7 +46,8 @@ export default async function RootLayout({
 
 	return (
 		<html lang="en">
-			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+			{/* <body className={`${geistSans.variable} ${geistMono.variable} ${dharmaGothic.variable} antialiased`}> */}
+			<body className={`${dharmaGothic.variable} ${inter.variable} antialiased`}>
 				<ToastProvider>
 					<SessionProvider>
 						<Navigation session={session} />

@@ -1,4 +1,4 @@
-import { lusitana } from '@/app/fonts/fonts'
+// import { lusitana } from '@/app/fonts/fonts'
 import { cn } from '@/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 import * as React from 'react'
@@ -48,7 +48,8 @@ const Typography = React.forwardRef<HTMLElement, TitleProps>(
 	({ as: Component = 'p', type = 'text', className, weight, size, ...props }, ref) => {
 		const Comp = type === 'md' ? Mdx : Component
 
-		return <Comp className={cn(titleVariants({ size, weight }), className, lusitana.className)} {...props} ref={ref} />
+		// return <Comp className={cn(titleVariants({ size, weight }), className, lusitana.className)} {...props} ref={ref} />
+		return <Comp className={cn(titleVariants({ size, weight }), className)} {...props} ref={ref} />
 	}
 )
 

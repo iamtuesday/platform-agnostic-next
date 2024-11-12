@@ -17,6 +17,10 @@ const config: Config = {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'dharma-gothic': ['var(--font-dharma-gothic)'],
+				inter: ['var(--font-inter)']
+			},
 			colors: {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
