@@ -36,10 +36,10 @@ export const HomeBanner = () => {
 	return (
 		<section className="relative h-[1000px] w-full">
 			<section className="absolute inset-0 z-10 flex h-full flex-col items-center justify-center gap-10 px-4 text-white laptop:px-0">
-				<div className="motion-safe:animate-fade-in-up flex flex-col items-center gap-10 motion-safe:delay-1000">
+				<div className="flex flex-col items-center gap-10 motion-safe:animate-fade-in-up motion-safe:delay-1000">
 					<Typography
 						as="h1"
-						className="text-center font-dharma-gothic uppercase tracking-tight text-white [line-height:0.6_!important]"
+						className="text-center font-dharma-gothic uppercase tracking-[-0.015em] text-white [line-height:0.6_!important]"
 						size="9xl"
 						weight="normal"
 					>
@@ -49,7 +49,7 @@ export const HomeBanner = () => {
 						<span
 							className="bg-clip-text text-transparent"
 							style={{
-								background: 'linear-gradient(305deg, #FFFFFF, #9600FB)',
+								background: '-webkit-linear-gradient(305deg,#FFFFFF, #9600FB)',
 								WebkitBackgroundClip: 'text',
 								WebkitTextFillColor: 'transparent'
 							}}
@@ -58,7 +58,7 @@ export const HomeBanner = () => {
 						</span>
 					</Typography>
 
-					<Typography className="mt-2 text-center font-inter text-white" size="xl" weight="medium">
+					<Typography className="mt-2 max-w-[100ch] text-center font-inter text-white" size="xl" weight="medium">
 						Pottencia de Lottus Education es un programa innovador diseñado para dar a los estudiantes las herramientas
 						necesarias para potenciar sus oportunidades académicas, laborales y de empleabilidad en el mundo actual.
 					</Typography>
