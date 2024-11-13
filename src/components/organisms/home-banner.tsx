@@ -39,7 +39,7 @@ export const HomeBanner = () => {
 				<div className="flex flex-col items-center gap-10 motion-safe:animate-fade-in-up motion-safe:delay-1000">
 					<Typography
 						as="h1"
-						className="text-center font-dharma-gothic uppercase tracking-[-0.015em] text-white [line-height:0.6_!important]"
+						className="text-center font-dharma-gothic uppercase tracking-[-0.015em] text-white laptop:[line-height:0.6_!important]"
 						size="9xl"
 						weight="normal"
 					>
