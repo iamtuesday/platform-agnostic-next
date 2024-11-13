@@ -65,7 +65,7 @@ export default async function RootLayout({
 		<html lang="en">
 			{/* <body className={`${geistSans.variable} ${geistMono.variable} ${dharmaGothic.variable} antialiased`}> */}
 			<body
-				className={`${clashGrotesk.variable} ${plusJakarta.variable} ${dharmaGothic.variable} ${inter.variable} font-inter antialiased`}
+				className={`${clashGrotesk.variable} ${plusJakarta.variable} ${dharmaGothic.variable} ${inter.variable} grid min-h-[100dvh] grid-rows-[auto_1f_auto] font-inter antialiased`}
 			>
 				<ToastProvider>
 					<SessionProvider>
