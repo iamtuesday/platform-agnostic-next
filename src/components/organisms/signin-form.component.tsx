@@ -5,10 +5,9 @@ import { authenticate } from '@/lib/auth'
 import { SignInFormSchema, SignInFormType } from '@/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ArrowRightIcon, AtSign } from 'lucide-react'
-import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import { TextField } from '../molecules'
+import { TextField, Typography } from '../molecules'
 import { Form } from '../ui'
 import { Button } from '../ui/button'
 
@@ -57,11 +56,15 @@ export const SignInForm = () => {
 						Sign in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
 					</Button>
 
-					<div className="mt-4 text-center text-sm text-gray-600">
-						{"Don't have an account?"}{' '}
+					<div className="mt-8 text-center text-sm text-gray-600">
+						{/* {"Don't have an account?"}{' '}
 						<Link href="/signup" className="text-blue-600 hover:underline">
 							Create one here
-						</Link>
+						</Link> */}
+
+						<Typography as="p" className="text-center text-sm text-gray-600">
+							Only if you are registered on the page will you be able to access it, if not, please contact us.
+						</Typography>
 					</div>
 				</div>
 			</form>

@@ -152,9 +152,9 @@ export const PottenciaLogo = ({ widht = 193, height = 72, className }: Pottencia
 					gradientUnits="userSpaceOnUse"
 					gradientTransform="translate(192.757 56.5028) scale(64.3024 64.3096)"
 				>
-					<stop stop-color="#9600FB"></stop>
-					<stop offset="0.79" stop-color="#E8008F" stopOpacity="0.0484"></stop>
-					<stop offset="1" stop-color="#FF0072" stopOpacity="0"></stop>
+					<stop stopColor="#9600FB"></stop>
+					<stop offset="0.79" stopColor="#E8008F" stopOpacity="0.0484"></stop>
+					<stop offset="1" stopColor="#FF0072" stopOpacity="0"></stop>
 				</radialGradient>
 				<radialGradient
 					id="paint1_radial_116_133"
@@ -164,9 +164,9 @@ export const PottenciaLogo = ({ widht = 193, height = 72, className }: Pottencia
 					gradientUnits="userSpaceOnUse"
 					gradientTransform="translate(14.3877 1.62332) scale(64.3024 64.3096)"
 				>
-					<stop stop-color="#9600FB"></stop>
-					<stop offset="0.79" stop-color="#E8008F" stopOpacity="0.0484"></stop>
-					<stop offset="1" stop-color="#FF0072" stopOpacity="0"></stop>
+					<stop stopColor="#9600FB"></stop>
+					<stop offset="0.79" stopColor="#E8008F" stopOpacity="0.0484"></stop>
+					<stop offset="1" stopColor="#FF0072" stopOpacity="0"></stop>
 				</radialGradient>
 			</defs>
 		</svg>

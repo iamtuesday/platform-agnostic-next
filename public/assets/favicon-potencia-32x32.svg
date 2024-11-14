@@ -19,14 +19,14 @@
   </g>
   <defs>
     <radialGradient id="paint0_radial_248_144" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(436.529 403.408) scale(371.465 371.506)">
-      <stop stop-color="#9600FB"></stop>
-      <stop offset="0.79" stop-color="#E8008F" stop-opacity="0.0484"></stop>
-      <stop offset="1" stop-color="#FF0072" stop-opacity="0"></stop>
+      <stop stopColor="#9600FB"></stop>
+      <stop offset="0.79" stopColor="#E8008F" stop-opacity="0.0484"></stop>
+      <stop offset="1" stopColor="#FF0072" stop-opacity="0"></stop>
     </radialGradient>
     <radialGradient id="paint1_radial_248_144" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(162.882 86.3778) scale(371.465 371.506)">
-      <stop stop-color="#9600FB"></stop>
-      <stop offset="0.79" stop-color="#E8008F" stop-opacity="0.0484"></stop>
-      <stop offset="1" stop-color="#FF0072" stop-opacity="0"></stop>
+      <stop stopColor="#9600FB"></stop>
+      <stop offset="0.79" stopColor="#E8008F" stop-opacity="0.0484"></stop>
+      <stop offset="1" stopColor="#FF0072" stop-opacity="0"></stop>
     </radialGradient>
     <clipPath id="clip0_248_144">
       <rect width="500" height="500" fill="white"></rect>
