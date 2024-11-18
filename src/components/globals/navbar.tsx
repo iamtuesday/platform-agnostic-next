@@ -2,9 +2,9 @@
 
 import { Button } from '@/components/ui/button'
 import { signOut } from '@/lib/auth'
+import { Session } from '@/lib/auth/definitions'
 import { cn } from '@/lib/utils'
 import { AlignLeft } from 'lucide-react'
-import { Session } from 'next-auth'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -23,7 +23,6 @@ interface NavigationProps {
 export const Navigation = ({ session }: NavigationProps) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const router = useRouter()
-	// const session = useSession()
 
 	const redirectToLogin = () => {
 		router.push('/signin')
@@ -88,7 +87,7 @@ export const Navigation = ({ session }: NavigationProps) => {
 
 							<li>
 								{/* auth buttons */}
-								{!!session?.user ? (
+								{!!session?.userId ? (
 									<Button onClick={async () => await signOut()}>Log Out</Button>
 								) : (
 									<Button onClick={() => redirectToLogin()}>Sign In</Button>
@@ -120,7 +119,7 @@ export const Navigation = ({ session }: NavigationProps) => {
 						<MenuItems />
 
 						<li>
-							{!!session?.user ? (
+							{!!session?.userId ? (
 								<Button onClick={async () => await signOut()}>Log Out</Button>
 							) : (
 								<Button onClick={() => redirectToLogin()}>Sign In</Button>
