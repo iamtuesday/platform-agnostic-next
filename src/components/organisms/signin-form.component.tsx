@@ -6,6 +6,7 @@ import { SignInFormSchema, SignInFormType } from '@/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ArrowRightIcon, AtSign } from 'lucide-react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { TextField, Typography } from '../molecules'
 import { Form } from '../ui'
 import { Button } from '../ui/button'
@@ -22,7 +23,11 @@ export const SignInForm = () => {
 	const { handleSubmit, control } = form
 
 	const onSubmit = async (data: SignInFormType) => {
-		await login(data)
+		const errorMessage = await login(data)
+
+		if (errorMessage?.msg) {
+			toast.error(errorMessage.msg)
+		}
 	}
 
 	return (

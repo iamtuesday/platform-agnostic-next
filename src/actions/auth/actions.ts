@@ -15,7 +15,11 @@ interface IAuthResponse {
 	access_token: string
 }
 
-export const login = async (signInData: SignInFormType): Promise<void> => {
+type errorMsgType = {
+	msg: string
+}
+
+export const login = async (signInData: SignInFormType): Promise<errorMsgType | void> => {
 	const API_ENDPOINT = '/authentication/login'
 
 	const options: FetchOptions = {
@@ -28,7 +32,9 @@ export const login = async (signInData: SignInFormType): Promise<void> => {
 
 	const [res, err] = await fetchService<IAuthResponse>(API_ENDPOINT, options)
 
-	if (err || !res) return
+	if (err || !res) {
+		return { msg: `Error al iniciar sesión: ${err?.message}` }
+	}
 
 	const session: Session = {
 		userId: res.id,

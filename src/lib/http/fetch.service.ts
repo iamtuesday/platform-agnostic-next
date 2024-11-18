@@ -60,7 +60,7 @@ export const fetchService = async <T>(url: string, options: FetchOptions): Promi
 
 		// Si la respuesta no es exitosa
 		if (!response.ok) {
-			throw new Error(`Error en la solicitud: ${response.statusText}`)
+			throw new Error(`${response.statusText}`)
 		}
 
 		// Identificar el tipo de contenido
