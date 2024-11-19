@@ -63,9 +63,15 @@ export const fetchService = async <T>(url: string, options: FetchOptions): Promi
 		// Realizar la solicitud
 		const response = await fetch(apiUrl, requestOptions)
 
-		// Si la respuesta no es exitosa
 		if (!response.ok) {
-			throw new Error(`${response.statusText}`)
+			let errorBody: undefined | Record<string, any> = undefined
+			try {
+				errorBody = await response.json()
+			} catch (jsonError) {
+				errorBody = { message: response.statusText }
+			}
+
+			throw new Error(errorBody?.message || response.statusText)
 		}
 
 		// Identificar el tipo de contenido
@@ -88,7 +94,7 @@ export const fetchService = async <T>(url: string, options: FetchOptions): Promi
 
 		return [data, null]
 	} catch (err) {
-		console.error(err)
+		// console.error(`Error en la solicitud: ${(err as any)?.message}`)
 		return [null, err as Error]
 	}
 }

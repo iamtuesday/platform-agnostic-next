@@ -9,8 +9,9 @@ import { redirect } from 'next/navigation'
 interface IAuthResponse {
 	id: string
 	email: string
-	firstName: string
-	lastName: string
+	// firstName: string
+	// lastName: string
+	fullName: string
 	role: string
 	access_token: string
 }
@@ -43,7 +44,6 @@ export const login = async (signInData: SignInFormType): Promise<errorMsgType | 
 
 	await createSession(session)
 
-	// Una vez autenticado redirigir a streaming
 	redirect('/streaming')
 }
 
@@ -89,7 +89,9 @@ export const verifyToken = async (): Promise<boolean> => {
 
 	const [existToken, error] = await fetchService<string>(API_ENDPOINT, options)
 
-	// Si existe el token, retornar true
+	/**
+	 * Si hay un error al verificar el token, eliminar la sesión
+	 */
 	if (existToken === 'true') {
 		return true
 	}
