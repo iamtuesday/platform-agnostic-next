@@ -30,10 +30,10 @@ export const fetchService = async <T>(url: string, options: FetchOptions): Promi
 
 		// Configuración de la solicitud
 
-		const defaultHeaders = new Headers()
+		const defaultHeaders: HeadersInit = {}
 
 		if (token) {
-			defaultHeaders.set('Authorization', `Bearer ${token}`)
+			defaultHeaders['Authorization'] = `Bearer ${token}`
 		}
 
 		const requestOptions: RequestInit = {
@@ -75,6 +75,10 @@ export const fetchService = async <T>(url: string, options: FetchOptions): Promi
 			data = await handler(response)
 		} else {
 			data = (await response.text()) as T
+		}
+
+		if (data === null || data === undefined) {
+			return [null, null]
 		}
 
 		return [data, null]

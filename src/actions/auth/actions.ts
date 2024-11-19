@@ -1,7 +1,7 @@
 'use server'
 
 import { Session } from '@/lib/auth/definitions'
-import { createSession } from '@/lib/auth/session'
+import { createSession, deleteSession, getSession } from '@/lib/auth/session'
 import { FetchOptions, fetchService } from '@/lib/http'
 import { SignInFormType } from '@/schemas'
 import { redirect } from 'next/navigation'
@@ -41,8 +41,36 @@ export const login = async (signInData: SignInFormType): Promise<errorMsgType | 
 		token: res.access_token
 	}
 
-	createSession(session)
+	await createSession(session)
 
 	// Una vez autenticado redirigir a streaming
 	redirect('/streaming')
+}
+
+export const logout = async (): Promise<errorMsgType | void> => {
+	const API_ENDPOINT = '/authentication/logout'
+
+	const session = await getSession()
+
+	const options: FetchOptions = {
+		method: 'POST',
+		body: JSON.stringify({
+			id: session?.userId
+		}),
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		token: session?.token
+	}
+
+	const [_, err] = await fetchService(API_ENDPOINT, options)
+
+	if (err) {
+		return { msg: `Error al cerrar sesión: ${err?.message}` }
+	}
+
+	deleteSession()
+
+	// Redirigir a home
+	redirect('/')
 }

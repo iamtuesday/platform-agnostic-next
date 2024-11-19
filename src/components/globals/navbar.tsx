@@ -1,13 +1,14 @@
 'use client'
 
+import { logout } from '@/actions/auth/actions'
 import { Button } from '@/components/ui/button'
-import { signOut } from '@/lib/auth'
 import { Session } from '@/lib/auth/definitions'
 import { cn } from '@/lib/utils'
 import { AlignLeft } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { toast } from 'sonner'
 import { PottenciaLogo } from './pottencia-logo'
 
 const menuItems = [
@@ -88,7 +89,18 @@ export const Navigation = ({ session }: NavigationProps) => {
 							<li>
 								{/* auth buttons */}
 								{!!session?.userId ? (
-									<Button onClick={async () => await signOut()}>Log Out</Button>
+									<Button
+										onClick={async () => {
+											const errorMessage = await logout()
+
+											if (errorMessage) {
+												toast.error(errorMessage.msg)
+												return
+											}
+										}}
+									>
+										Log Out
+									</Button>
 								) : (
 									<Button onClick={() => redirectToLogin()}>Sign In</Button>
 								)}
@@ -120,7 +132,20 @@ export const Navigation = ({ session }: NavigationProps) => {
 
 						<li>
 							{!!session?.userId ? (
-								<Button onClick={async () => await signOut()}>Log Out</Button>
+								<Button
+									onClick={async () => {
+										const errorMessage = await logout()
+
+										if (errorMessage) {
+											toast.error(errorMessage.msg)
+											return
+										}
+
+										setIsOpen(false)
+									}}
+								>
+									Log Out
+								</Button>
 							) : (
 								<Button onClick={() => redirectToLogin()}>Sign In</Button>
 							)}
