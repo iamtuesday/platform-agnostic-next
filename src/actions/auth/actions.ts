@@ -74,3 +74,25 @@ export const logout = async (): Promise<errorMsgType | void> => {
 	// Redirigir a home
 	redirect('/')
 }
+
+export const verifyToken = async (): Promise<boolean> => {
+	const session = await getSession()
+
+	if (!session?.userId) return false
+
+	const API_ENDPOINT = `/authentication/verify/${session?.userId}`
+
+	const options: FetchOptions = {
+		method: 'GET',
+		token: session?.token
+	}
+
+	const [existToken, error] = await fetchService<string>(API_ENDPOINT, options)
+
+	// Si existe el token, retornar true
+	if (existToken === 'true') {
+		return true
+	}
+
+	return false
+}

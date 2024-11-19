@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getSession } from './lib/auth/session'
+import { verifyToken } from './actions/auth/actions'
+import { getSession, SESSION_NAME } from './lib/auth/session'
 
 const protectedRoutePatterns = [/^\/dashboard/, /^\/streaming/, /^\/red-social/]
 const authRoutes = ['/signin']
@@ -21,6 +22,17 @@ export default async function middleware(req: NextRequest) {
 	// Si se intenta acceder a register o login estando autenticado, redirecciona a profile
 	if (isAuthRoute && session?.userId) {
 		return NextResponse.redirect(new URL('/streaming', req.url))
+	}
+
+	const isTokenValid = await verifyToken()
+
+	// Si el token no es válido, eliminar la cookie de sesión
+	if (!isTokenValid) {
+		const res = NextResponse.next()
+		// Eliminar la cookie de sesión
+		res.cookies.delete(SESSION_NAME)
+		// Regresar la respuesta modificada con la cookie eliminada
+		return res
 	}
 
 	return NextResponse.next()

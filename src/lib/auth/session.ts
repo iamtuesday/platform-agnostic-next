@@ -2,7 +2,7 @@ import { cookies } from 'next/headers'
 import 'server-only'
 import { Session } from './definitions'
 
-const SESSION_NAME = '_platform_agnostic_next_'
+export const SESSION_NAME = '_platform_agnostic_next_'
 
 import { JWTPayload, SignJWT, jwtVerify } from 'jose'
 import 'server-only'
