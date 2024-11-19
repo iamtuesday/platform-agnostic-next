@@ -6,6 +6,10 @@ export interface FetchOptions {
 	headers?: HeadersInit
 	params?: URLSearchParams | Record<string, string>
 	token?: string
+	next?: {
+		revalidate?: number
+		tags?: string[]
+	}
 }
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'localhost:3000'
@@ -18,7 +22,7 @@ const contentTypes: Record<string, <T>(response: Response) => Promise<T>> = {
 }
 
 export const fetchService = async <T>(url: string, options: FetchOptions): Promise<FetchResponse<T>> => {
-	const { method, body, headers = {}, params, token } = options
+	const { method, body, headers = {}, params, token, next } = options
 
 	try {
 		// Construcción de la URL con parámetros
@@ -38,7 +42,8 @@ export const fetchService = async <T>(url: string, options: FetchOptions): Promi
 
 		const requestOptions: RequestInit = {
 			method,
-			headers: { ...defaultHeaders, ...headers }
+			headers: { ...defaultHeaders, ...headers },
+			...next
 		}
 
 		// Manejar el método POST y PUT
