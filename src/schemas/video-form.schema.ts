@@ -1,7 +1,7 @@
 import * as z from 'zod'
 
 export const VideoFormSchema = z.object({
-	url: z.string().url().min(6),
+	url: z.string().min(6),
 	id: z.string().optional()
 })
 
