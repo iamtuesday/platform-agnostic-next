@@ -34,7 +34,7 @@ export const login = async (signInData: SignInFormType): Promise<errorMsgType | 
 	const [res, err] = await fetchService<IAuthResponse>(API_ENDPOINT, options)
 
 	if (err || !res) {
-		return { msg: `Error al iniciar sesión: ${err?.message}` }
+		return { msg: `${err?.message}` }
 	}
 
 	const session: Session = {
