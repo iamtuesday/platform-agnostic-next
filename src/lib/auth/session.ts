@@ -13,7 +13,7 @@ export const createSession = async (session: Session): Promise<void> => {
 
 	cookies().set(SESSION_NAME, sessionString, {
 		httpOnly: true,
-		secure: true, // Usa true solo si estás en un entorno HTTPS
+		secure: process.env.NODE_ENV === 'production', // Use only in production
 		sameSite: 'strict',
 		path: '/'
 	})
