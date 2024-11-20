@@ -198,7 +198,7 @@ export const DataTable = <TData, TValue>({
 
 				<section className="flex w-full items-center justify-between gap-2 tablet:w-max tablet:justify-start">
 					<Typography size="sm">
-						Página {getQuery('page')} de {Math.ceil(totalItems / Number(getQuery('size')) || 1)}
+						Página {getQuery('page') || 1} de {Math.ceil(totalItems / (Number(getQuery('size')) || 10))}
 					</Typography>
 
 					<>
