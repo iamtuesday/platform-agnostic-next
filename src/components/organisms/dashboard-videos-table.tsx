@@ -1,21 +1,24 @@
 'use client'
 
-import { createReel } from '@/actions/dashboard/actions'
 import { ReelTypeEnum } from '@/app/enums'
-import { IReelResponse } from '@/interfaces'
+import { ReelFormSchemaType } from '@/schemas'
 import { Plus } from 'lucide-react'
 import { ReelForm } from '../molecules/reel-form.component'
-import { videosTableColumns } from '../molecules/videos-table-columns'
 import { Button } from '../ui'
 import { CustomSheet } from '../ui/custom-sheet.component'
-import { DataTable } from './data-table'
+import { DataTable, DataTableProps } from './data-table'
 
-interface DashboardVideosTableProps {
-	videos: IReelResponse[]
+interface DashboardVideosTableProps<TData, TValue> extends DataTableProps<TData, TValue> {
 	reelType: ReelTypeEnum
+	handleCreateSubmit: (data: ReelFormSchemaType) => Promise<void>
 }
 
-export const DashboardVideosTable = ({ videos, reelType }: DashboardVideosTableProps) => {
+export const DashboardVideosTable = <TData, TValue>({
+	reelType,
+	columns,
+	data,
+	handleCreateSubmit
+}: DashboardVideosTableProps<TData, TValue>) => {
 	return (
 		<DataTable
 			customBar={
@@ -35,7 +38,8 @@ export const DashboardVideosTable = ({ videos, reelType }: DashboardVideosTableP
 									type: reelType
 								}}
 								handleOnSubmit={async data => {
-									await createReel(data)
+									// Function para controlar el submit del reel-form
+									if (handleCreateSubmit) await handleCreateSubmit(data)
 									handleOpen(false)
 								}}
 							/>
@@ -45,8 +49,8 @@ export const DashboardVideosTable = ({ videos, reelType }: DashboardVideosTableP
 			}
 			filterBy="title"
 			filterPlaceholder="Filter by title"
-			columns={videosTableColumns}
-			data={videos}
+			columns={columns}
+			data={data}
 			classNames={{ card: 'grid  space-y-0 gap-y-1' }}
 		/>
 	)

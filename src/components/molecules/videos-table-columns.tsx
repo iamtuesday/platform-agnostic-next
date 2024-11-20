@@ -1,6 +1,6 @@
 'use client'
 
-import { updateReel } from '@/actions/dashboard/actions'
+import { deleteReel, updateReel } from '@/actions/dashboard/actions'
 import { IReelResponse } from '@/interfaces'
 import { ColumnDef } from '@tanstack/react-table'
 import { ArrowUpDown, Pencil, Trash2 } from 'lucide-react'
@@ -80,14 +80,18 @@ export const videosTableColumns: ColumnDef<IReelResponse>[] = [
 			)
 		}
 	},
-
 	{
 		id: 'actions',
 		header: () => <Typography size="sm">Acciones</Typography>,
 		cell: ({ row: { original } }) => {
 			return (
 				<div className="flex w-full gap-2">
-					<Button variant="outline" size="icon" className="w-full">
+					<Button
+						onClick={async () => await deleteReel(original.id || '')}
+						variant="outline"
+						size="icon"
+						className="w-full"
+					>
 						<Trash2 className="h-4 w-4" />
 					</Button>
 

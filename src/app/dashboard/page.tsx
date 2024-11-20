@@ -1,5 +1,5 @@
 import { getUsers } from '@/actions/dashboard/actions'
-import { usersTableColumns } from '@/components/molecules'
+import { Typography, usersTableColumns } from '@/components/molecules'
 import { ServerDataTable } from '@/components/organisms'
 import { mapUserOutputToUserTable } from '@/mappers'
 
@@ -23,7 +23,11 @@ export default async function DashboardPage({
 	const mappedUsers = users?.items?.map(mapUserOutputToUserTable)
 
 	return (
-		<div className="min-h-[70vh]">
+		<main className="min-h-[70vh] space-y-4">
+			<Typography size="xl" weight="semibold">
+				Usuarios
+			</Typography>
+
 			<ServerDataTable
 				totalItems={users?.totalItems || 0}
 				filterPlaceholder="Filtrar por nombre"
@@ -31,6 +35,6 @@ export default async function DashboardPage({
 				data={mappedUsers || []}
 				classNames={{ card: 'grid  space-y-0 gap-y-1' }}
 			/>
-		</div>
+		</main>
 	)
 }
