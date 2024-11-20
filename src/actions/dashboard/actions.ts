@@ -10,8 +10,8 @@ interface IVideoResponse {
 	url: string
 }
 
-export const updateVideo = async (videoFormData: VideoFormType): Promise<void> => {
-	const API_ENDPOINT = '/video'
+export const updateStreamingVideo = async (videoFormData: VideoFormType): Promise<void> => {
+	const API_ENDPOINT = '/streaming'
 
 	const options: FetchOptions = {
 		method: 'PUT',
@@ -26,8 +26,8 @@ export const updateVideo = async (videoFormData: VideoFormType): Promise<void> =
 	revalidateTag('streaming-video')
 }
 
-export const getVideo = async (): Promise<IVideoResponse | null> => {
-	const API_ENDPOINT = `/video`
+export const getStreamingVideo = async (): Promise<IVideoResponse | null> => {
+	const API_ENDPOINT = `/streaming`
 
 	const options: FetchOptions = {
 		method: 'GET',

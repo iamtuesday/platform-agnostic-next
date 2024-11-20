@@ -1,9 +1,12 @@
+import { getStreamingVideo } from '@/actions/dashboard/actions'
 import { Typography } from '@/components/molecules'
 import { Mdx } from '@/components/ui'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 
-export default function StreamingPage() {
+export default async function StreamingPage() {
+	const video = await getStreamingVideo()
+
 	const iframeUrl = `<iframe
 			title="vimeo-player"
 			className="absolute top-0 left-0 w-full h-full"
@@ -14,7 +17,7 @@ export default function StreamingPage() {
 		/>
 	`
 
-	const iframeUrlFormat = iframeUrl.replace(/<iframe/gi, `<iframe className="absolute top-0 left-0 w-full h-full"`)!
+	const iframeUrlFormat = video?.url ? video.url : iframeUrl
 
 	return (
 		<div className="relative flex flex-col bg-black pb-16">
@@ -47,7 +50,7 @@ export default function StreamingPage() {
 
 				<div className="overflow-hidden rounded-lg bg-black shadow-lg">
 					<div className="relative pt-[56.25%]">
-						<Mdx>{iframeUrlFormat}</Mdx>
+						<Mdx>{iframeUrlFormat.replace(/<iframe/gi, `<iframe className="absolute top-0 left-0 w-full h-full"`)}</Mdx>
 					</div>
 				</div>
 			</main>

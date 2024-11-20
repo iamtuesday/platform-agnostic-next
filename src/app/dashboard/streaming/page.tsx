@@ -1,8 +1,8 @@
-import { getVideo } from '@/actions/dashboard/actions'
+import { getStreamingVideo } from '@/actions/dashboard/actions'
 import { VideoForm } from '@/components/molecules'
 
-export default async function VideoPage() {
-	const video = await getVideo()
+export default async function StreamingPage() {
+	const video = await getStreamingVideo()
 
 	return (
 		<div className="min-h-[70vh]">

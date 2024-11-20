@@ -1,6 +1,6 @@
 'use client'
 
-import { updateVideo } from '@/actions/dashboard/actions'
+import { updateStreamingVideo } from '@/actions/dashboard/actions'
 import { VideoFormSchema, VideoFormType } from '@/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -27,7 +27,7 @@ export const VideoForm = ({ defaultVideoUrl, defaultVideoId }: VideoFormProps) =
 
 	const onSubmit = async (data: VideoFormType) => {
 		try {
-			await updateVideo(data)
+			await updateStreamingVideo(data)
 			toast('Se actualizo la url del video')
 		} catch (err) {
 			if (err instanceof Error) {
