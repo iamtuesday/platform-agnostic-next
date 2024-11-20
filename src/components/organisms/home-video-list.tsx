@@ -1,27 +1,19 @@
+import { getReels } from '@/actions/dashboard/actions'
 import { Typography } from '@/components/molecules'
 import { VideoCard } from '@/components/molecules/video-card.component'
 import { Button } from '@/components/ui'
 import { cn } from '@/lib/utils'
+import { mapReelOutputToReelTable } from '@/mappers/reel-output-to-reel-table.map'
 
-const arr = [
-	{
-		id: '1',
-		title: 'Título del video',
-		videoUrl: 'https://www.youtube.com/embed/smPos0mJvh8'
-	},
-	{
-		id: '2',
-		title: 'Título del video',
-		videoUrl: 'https://www.youtube.com/embed/smPos0mJvh8'
-	},
-	{
-		id: '3',
-		title: 'Logo Landing Page',
-		videoUrl: 'https://player.vimeo.com/video/642263700?h=5bb50fc9fb'
+export const HomeVideosList = async () => {
+	const params = {
+		type: 'video'
 	}
-]
 
-export const HomeVideosList = () => {
+	const videos = await getReels(params)
+
+	const mappedVideos = videos?.map(mapReelOutputToReelTable)
+
 	return (
 		<section className="bg-black py-20" id="videos">
 			<div className="mx-auto max-w-6xl space-y-10 px-4 laptop:px-0">
@@ -41,9 +33,7 @@ export const HomeVideosList = () => {
 				</header>
 
 				<div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-					{arr.map(item => (
-						<VideoCard key={item.id} id={item.id} title={item.title} videoUrl={item.videoUrl} />
-					))}
+					{mappedVideos?.map(item => <VideoCard key={item.id} id={item.id} title={item.title} videoUrl={item.url} />)}
 				</div>
 			</div>
 		</section>

@@ -1,6 +1,5 @@
 'use client'
 
-import { updateReel } from '@/actions/dashboard/actions'
 import { ReelTypeEnum } from '@/app/enums'
 import { Button } from '@/components/ui/button'
 import { IReelResponse } from '@/interfaces'
@@ -12,10 +11,10 @@ import { TextField } from './text-field.component'
 
 interface ReelFormProps {
 	defaultValues?: Partial<IReelResponse>
-	handleDialog?: () => void
+	handleOnSubmit?: (data: ReelFormSchemaType) => Promise<void>
 }
 
-export const ReelForm = ({ defaultValues, handleDialog }: ReelFormProps) => {
+export const ReelForm = ({ defaultValues, handleOnSubmit }: ReelFormProps) => {
 	const form = useForm<ReelFormSchemaType>({
 		resolver: zodResolver(ReelFormSchema),
 		defaultValues: {
@@ -31,18 +30,16 @@ export const ReelForm = ({ defaultValues, handleDialog }: ReelFormProps) => {
 	const { handleSubmit, control, reset } = form
 
 	const onSubmit = async (data: ReelFormSchemaType) => {
-		await updateReel(data)
+		if (handleOnSubmit) await handleOnSubmit(data)
 		reset()
-
-		if (handleDialog) handleDialog()
 	}
 
 	return (
 		<Form {...form}>
 			<form onSubmit={handleSubmit(onSubmit)} className="w-full">
-				<TextField id="url" label="Url del video" control={control} name="url" placeholder="https://" />
-
 				<TextField id="title" label="Titulo" control={control} name="title" placeholder="Titulo del video" />
+
+				<TextField id="url" label="Url del video" control={control} name="url" placeholder="https://" />
 
 				<TextField
 					classNames={{

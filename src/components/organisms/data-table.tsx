@@ -44,6 +44,7 @@ interface DataTableProps<TData, TValue> {
 	}
 	filterBy?: string
 	filterPlaceholder?: string
+	customBar?: React.ReactNode
 }
 
 export const DataTable = <TData, TValue>({
@@ -51,7 +52,8 @@ export const DataTable = <TData, TValue>({
 	columns,
 	classNames,
 	filterBy,
-	filterPlaceholder
+	filterPlaceholder,
+	customBar
 }: DataTableProps<TData, TValue>) => {
 	const [sorting, setSorting] = React.useState<SortingState>([])
 	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -79,13 +81,14 @@ export const DataTable = <TData, TValue>({
 
 	return (
 		<div className={cn('w-full space-y-2 laptop:space-y-4')}>
-			<header>
+			<header className="flex gap-x-4">
 				<Input
 					placeholder={filterPlaceholder}
 					value={(table.getColumn(filterBy!)?.getFilterValue() as string) ?? ''}
 					onChange={event => table.getColumn(filterBy!)?.setFilterValue(event.target.value)}
 					className="max-w-sm"
 				/>
+				{customBar}
 			</header>
 			<Table className="hidden laptop:table">
 				<TableHeader>

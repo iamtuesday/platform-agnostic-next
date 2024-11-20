@@ -1,5 +1,6 @@
 'use client'
 
+import { updateReel } from '@/actions/dashboard/actions'
 import { IReelResponse } from '@/interfaces'
 import { ColumnDef } from '@tanstack/react-table'
 import { ArrowUpDown, Pencil, Trash2 } from 'lucide-react'
@@ -48,7 +49,7 @@ export const videosTableColumns: ColumnDef<IReelResponse>[] = [
 			)
 		},
 		cell: ({ row }) => (
-			<Typography size="sm" className="truncate">
+			<Typography size="sm" className="max-w-[30ch] truncate">
 				{row.getValue('url')}
 			</Typography>
 		)
@@ -99,7 +100,15 @@ export const videosTableColumns: ColumnDef<IReelResponse>[] = [
 						}
 					>
 						{handleOpen => {
-							return <ReelForm handleDialog={() => handleOpen(false)} defaultValues={original} />
+							return (
+								<ReelForm
+									handleOnSubmit={async data => {
+										await updateReel(data)
+										handleOpen(false)
+									}}
+									defaultValues={original}
+								/>
+							)
 						}}
 					</CustomSheet>
 				</div>
