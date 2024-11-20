@@ -1,3 +1,4 @@
+export * from './data-table'
 export * from './home-banner'
 export * from './home-calendar'
 export * from './home-location'
