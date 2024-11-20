@@ -97,3 +97,21 @@ export const updateReel = async (reelFormData: ReelFormSchemaType): Promise<void
 	revalidatePath('/dashboard/reel')
 	revalidatePath('/')
 }
+
+export const createReel = async (reelFormData: ReelFormSchemaType): Promise<void> => {
+	const API_ENDPOINT = `/reel/${reelFormData.id}`
+
+	const options: FetchOptions = {
+		method: 'POST',
+		body: JSON.stringify(reelFormData),
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	}
+
+	await fetchService<IVideoResponse>(API_ENDPOINT, options)
+
+	revalidatePath('/dashboard/videos')
+	revalidatePath('/dashboard/reel')
+	revalidatePath('/')
+}
