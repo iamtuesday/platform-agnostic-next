@@ -1,6 +1,6 @@
-import { auth } from '@/auth'
 import { Footer, Navigation } from '@/components/globals'
 import { ToastProvider } from '@/components/ui'
+import { getSession } from '@/lib/auth/session'
 import type { Metadata } from 'next'
 import { SessionProvider } from 'next-auth/react'
 import { Inter } from 'next/font/google'
@@ -59,7 +59,7 @@ export default async function RootLayout({
 }: Readonly<{
 	children: React.ReactNode
 }>) {
-	const session = await auth()
+	const session = await getSession()
 
 	return (
 		<html lang="en">

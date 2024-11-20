@@ -1,7 +1,7 @@
 'use client'
 
+import { login } from '@/actions/auth/actions'
 import { lusitana } from '@/app/fonts/fonts'
-import { authenticate } from '@/lib/auth'
 import { SignInFormSchema, SignInFormType } from '@/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ArrowRightIcon, AtSign } from 'lucide-react'
@@ -20,20 +20,14 @@ export const SignInForm = () => {
 		mode: 'onBlur'
 	})
 
-	const { handleSubmit, control, reset } = form
+	const { handleSubmit, control } = form
 
 	const onSubmit = async (data: SignInFormType) => {
-		const formData = new FormData()
-		formData.append('email', data.email)
+		const errorMessage = await login(data)
 
-		const error = await authenticate(undefined, formData)
-
-		if (error) {
-			toast.error(error)
-			return
+		if (errorMessage?.msg) {
+			toast.error(errorMessage.msg)
 		}
-
-		reset()
 	}
 
 	return (

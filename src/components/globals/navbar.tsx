@@ -1,13 +1,14 @@
 'use client'
 
+import { logout } from '@/actions/auth/actions'
 import { Button } from '@/components/ui/button'
-import { signOut } from '@/lib/auth'
+import { Session } from '@/lib/auth/definitions'
 import { cn } from '@/lib/utils'
 import { AlignLeft } from 'lucide-react'
-import { Session } from 'next-auth'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { toast } from 'sonner'
 import { PottenciaLogo } from './pottencia-logo'
 
 const menuItems = [
@@ -23,7 +24,6 @@ interface NavigationProps {
 export const Navigation = ({ session }: NavigationProps) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const router = useRouter()
-	// const session = useSession()
 
 	const redirectToLogin = () => {
 		router.push('/signin')
@@ -88,8 +88,19 @@ export const Navigation = ({ session }: NavigationProps) => {
 
 							<li>
 								{/* auth buttons */}
-								{!!session?.user ? (
-									<Button onClick={async () => await signOut()}>Log Out</Button>
+								{!!session?.userId ? (
+									<Button
+										onClick={async () => {
+											const errorMessage = await logout()
+
+											if (errorMessage) {
+												toast.error(errorMessage.msg)
+												return
+											}
+										}}
+									>
+										Log Out
+									</Button>
 								) : (
 									<Button onClick={() => redirectToLogin()}>Sign In</Button>
 								)}
@@ -120,8 +131,21 @@ export const Navigation = ({ session }: NavigationProps) => {
 						<MenuItems />
 
 						<li>
-							{!!session?.user ? (
-								<Button onClick={async () => await signOut()}>Log Out</Button>
+							{!!session?.userId ? (
+								<Button
+									onClick={async () => {
+										const errorMessage = await logout()
+
+										if (errorMessage) {
+											toast.error(errorMessage.msg)
+											return
+										}
+
+										setIsOpen(false)
+									}}
+								>
+									Log Out
+								</Button>
 							) : (
 								<Button onClick={() => redirectToLogin()}>Sign In</Button>
 							)}

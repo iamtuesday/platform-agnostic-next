@@ -5,7 +5,7 @@ import { RotateCw, ZoomIn, ZoomOut } from 'lucide-react'
 import Image from 'next/image'
 import { PhotoProvider, PhotoView } from 'react-photo-view'
 import 'react-photo-view/dist/react-photo-view.css'
-import imageUrl from '../../../public/assets/potencia-img-location.png'
+import imageUrl from '../../../public/assets/potencia-img-location.jpeg'
 import { Typography } from '../molecules'
 
 export const HomeLocation = () => {
@@ -51,7 +51,7 @@ export const HomeLocation = () => {
 						)
 					}}
 				>
-					<PhotoView src="/assets/potencia-img-location.png">
+					<PhotoView src="/assets/potencia-img-location.jpeg">
 						<Image
 							src={imageUrl}
 							alt="Imagen de ejemplo"
@@ -62,7 +62,7 @@ export const HomeLocation = () => {
 					</PhotoView>
 				</PhotoProvider>
 
-				<figure className="h-auto w-full"></figure>
+				<figure className="h-auto w-full" />
 			</div>
 		</section>
 	)

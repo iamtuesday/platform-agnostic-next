@@ -1,0 +1,90 @@
+import { cookies } from 'next/headers'
+import 'server-only'
+import { Session } from './definitions'
+
+export const SESSION_NAME = '_platform_agnostic_next_'
+
+import { JWTPayload, SignJWT, jwtVerify } from 'jose'
+import 'server-only'
+
+const secretKey = process.env.NEXT_SESSION_SECRET
+const encodedKey = new TextEncoder().encode(secretKey)
+
+export const encrypt = async (payload: Session): Promise<string> => {
+	const encrypToken = new SignJWT(payload).setProtectedHeader({ alg: 'HS256' }).sign(encodedKey)
+	return await encrypToken
+}
+
+export const decrypt = async (session: string | undefined = '') => {
+	if (!session) {
+		throw new Error('No se proporcionó una cookie de sesión')
+	}
+
+	try {
+		const { payload } = await jwtVerify(session, encodedKey, { algorithms: ['HS256'] })
+		return payload
+	} catch (error) {
+		console.error('Error al desencriptar la cookie:', error)
+		throw error
+	}
+}
+
+export const createSession = async (session: Session): Promise<void> => {
+	const encryptSession = await encrypt(session)
+
+	cookies().set(SESSION_NAME, encryptSession, {
+		httpOnly: true,
+		secure: true,
+		sameSite: 'strict',
+		path: '/'
+	})
+}
+
+export const deleteSession = (): void => {
+	cookies().delete(SESSION_NAME)
+}
+
+export const getSession = async (): Promise<Session | null> => {
+	const session = cookies().get(SESSION_NAME)?.value
+
+	if (!session) {
+		console.error('La cookie de sesión está vacía')
+		return null
+	}
+
+	try {
+		/**
+		 * Desencriptar la cookie de sesión
+		 */
+		const decryptSession: JWTPayload = await decrypt(session)
+		// console.log('Payload desencriptado:', decryptSession)
+
+		/**
+		 * Verificar que la cookie de sesión tenga el formato correcto
+		 */
+		if (!decryptSession || typeof decryptSession.userId !== 'string' || typeof decryptSession.token !== 'string') {
+			console.error('La cookie de sesión no tiene el formato correcto', decryptSession)
+			return null
+		}
+
+		/**
+		 * Retornar la sesión desencriptada
+		 */
+		const returnSession: Session = {
+			userId: decryptSession?.userId,
+			token: decryptSession?.token
+		}
+
+		return returnSession
+	} catch (error) {
+		console.error('Error al analizar la cookie de sesión:', error)
+
+		if (error instanceof DOMException) {
+			console.error('Error de DOMException al procesar la cookie de sesión', error)
+		} else {
+			console.error('Error inesperado al procesar la cookie de sesión', error)
+		}
+
+		return null
+	}
+}

@@ -66,7 +66,8 @@ export const TextField = <T extends FieldValues>({
 								placeholder={placeholder}
 								className={cn(
 									classNames?.field,
-									'peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500'
+									'peer block w-full rounded-md border border-gray-200 py-[9px] text-sm outline-2 placeholder:text-gray-500',
+									icon ? 'pl-10' : ''
 								)}
 								{...field}
 							/>
