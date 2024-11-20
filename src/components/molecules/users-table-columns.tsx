@@ -2,7 +2,7 @@
 
 import { IUserInfoTable } from '@/interfaces'
 import { ColumnDef } from '@tanstack/react-table'
-import { ArrowUpDown, Delete } from 'lucide-react'
+import { ArrowUpDown } from 'lucide-react'
 import { Button } from '../ui'
 import { Typography } from './typography.component'
 
@@ -71,7 +71,7 @@ export const usersTableColumns: ColumnDef<IUserInfoTable>[] = [
 					<Typography weight="semibold" size="sm" as="span" className="pr-2 laptop:hidden">
 						Primer Login:
 					</Typography>
-					{JSON.stringify(row.getValue('firstLogin'))}
+					{row.getValue('firstLogin')}
 				</Typography>
 			)
 		}
@@ -151,19 +151,19 @@ export const usersTableColumns: ColumnDef<IUserInfoTable>[] = [
 				</Typography>
 			)
 		}
-	},
-	{
-		id: 'actions',
-		header: () => <Typography size="sm">Acciones</Typography>,
-		cell: ({}) => {
-			return (
-				<Button variant="outline" className="w-full gap-2">
-					<Typography size="sm" as="span" className="pr-2 laptop:hidden">
-						Eliminar
-					</Typography>
-					<Delete className="h-4 w-4" />
-				</Button>
-			)
-		}
 	}
+	// {
+	// 	id: 'actions',
+	// 	header: () => <Typography size="sm">Acciones</Typography>,
+	// 	cell: ({}) => {
+	// 		return (
+	// 			<Button variant="outline" className="w-full gap-2">
+	// 				<Typography size="sm" as="span" className="pr-2 laptop:hidden">
+	// 					Eliminar
+	// 				</Typography>
+	// 				<Delete className="h-4 w-4" />
+	// 			</Button>
+	// 		)
+	// 	}
+	// }
 ]

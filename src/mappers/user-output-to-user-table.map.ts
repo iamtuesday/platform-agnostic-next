@@ -6,7 +6,7 @@ export const mapUserOutputToUserTable = (userInfo: IUserInfo): IUserInfoTable =>
 		fullName: userInfo.fullName || 'desconocido',
 		email: userInfo.email || 'desconocido',
 		campus: userInfo.campus || 'desconocido',
-		firstLogin: userInfo.firstLogin,
+		firstLogin: userInfo.firstLogin === true ? 'Si' : 'No',
 		mode: userInfo.mode || 'desconocido',
 		country: userInfo.country || 'desconocido'
 	}

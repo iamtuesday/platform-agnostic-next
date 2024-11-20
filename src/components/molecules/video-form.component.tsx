@@ -5,7 +5,7 @@ import { VideoFormSchema, VideoFormType } from '@/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import { Button, Form } from '../ui'
+import { Button, Form, Textarea } from '../ui'
 import { TextField } from './text-field.component'
 
 interface VideoFormProps {
@@ -43,12 +43,15 @@ export const VideoForm = ({ defaultVideoUrl, defaultVideoId }: VideoFormProps) =
 		<Form {...form}>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<TextField
+					classNames={{
+						field: 'max-h-[300px]'
+					}}
 					id="url"
+					as={Textarea}
 					label="Url del video"
 					control={control}
 					name="url"
 					placeholder="https://"
-					type={'search' as any}
 				/>
 
 				<footer>

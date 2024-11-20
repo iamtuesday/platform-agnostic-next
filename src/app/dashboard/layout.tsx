@@ -8,27 +8,21 @@ const sidebarNavItems: { title: string; href: string; icon: keyof typeof dynamic
 		href: '/dashboard/users',
 		icon: 'users'
 	},
-
 	{
 		title: 'Streaming',
 		href: '/dashboard/streaming',
+		icon: 'radio'
+	},
+	{
+		title: 'Videos',
+		href: '/dashboard/videos',
 		icon: 'video'
+	},
+	{
+		title: 'Reels',
+		href: '/dashboard/reels',
+		icon: 'list-video'
 	}
-	// {
-	// 	title: 'Board',
-	// 	href: '/dashboard/board',
-	// 	icon: 'circuit-board'
-	// },
-	// {
-	// 	title: 'Directory',
-	// 	href: '/dashboard/directory',
-	// 	icon: 'book'
-	// },
-	// {
-	// 	title: 'News',
-	// 	href: '/dashboard/news',
-	// 	icon: 'newspaper'
-	// }
 ]
 
 interface SettingsLayoutProps {

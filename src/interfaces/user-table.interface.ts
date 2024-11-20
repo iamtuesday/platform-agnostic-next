@@ -3,7 +3,7 @@ export interface IUserInfoTable {
 	fullName: string
 	email: string
 	campus: string
-	firstLogin: boolean
+	firstLogin: string
 	mode: string
 	country: string
 }
