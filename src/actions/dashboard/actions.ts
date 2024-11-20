@@ -1,9 +1,9 @@
 'use server'
 
-import { IUserResponse } from '@/interfaces'
+import { IReelResponse, IUserResponse } from '@/interfaces'
 import { FetchOptions, fetchService } from '@/lib/http'
-import { VideoFormType } from '@/schemas'
-import { revalidateTag } from 'next/cache'
+import { ReelFormSchemaType, VideoFormType } from '@/schemas'
+import { revalidatePath, revalidateTag } from 'next/cache'
 
 interface IVideoResponse {
 	id: string
@@ -60,4 +60,40 @@ export const getUsers = async (params?: Record<string, any>): Promise<IUserRespo
 	if (error || !users) return null
 
 	return users
+}
+
+export const getReels = async (params?: Record<string, any>): Promise<IReelResponse[] | null> => {
+	const API_ENDPOINT = `/reel`
+
+	const options: FetchOptions = {
+		method: 'GET',
+		params: params,
+		next: {
+			revalidate: 1
+		}
+	}
+
+	const [videos, error] = await fetchService<IReelResponse[]>(API_ENDPOINT, options)
+
+	if (error || !videos) return null
+
+	return videos
+}
+
+export const updateReel = async (reelFormData: ReelFormSchemaType): Promise<void> => {
+	const API_ENDPOINT = `/reel/${reelFormData.id}`
+
+	const options: FetchOptions = {
+		method: 'PUT',
+		body: JSON.stringify(reelFormData),
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	}
+
+	await fetchService<IVideoResponse>(API_ENDPOINT, options)
+
+	revalidatePath('/dashboard/videos')
+	revalidatePath('/dashboard/reel')
+	revalidatePath('/')
 }
