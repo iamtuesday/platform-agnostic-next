@@ -15,7 +15,7 @@ const menuItems = [
 	{ href: '/#agenda', label: 'Agenda' },
 	{ href: '/#mapa', label: 'Mapa' },
 	{ href: '/#videos', label: 'Videos' },
-	{ href: '/red-social', label: 'Red Social' }
+	{ href: '/reels', label: 'Reels' }
 ]
 interface NavigationProps {
 	session: Session | null
@@ -35,10 +35,7 @@ export const Navigation = ({ session }: NavigationProps) => {
 				<li key={item.href}>
 					<Link
 						href={item.href}
-						className={cn(
-							'text-white transition-colors hover:text-white/50',
-							item.href === '/red-social' ? 'pointer-events-none text-white/50' : ''
-						)}
+						className={cn('text-white transition-colors hover:text-white/50')}
 						// className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900"
 						onClick={() => setIsOpen(false)}
 					>
