@@ -57,8 +57,6 @@ export const getUsers = async (params?: Record<string, any>): Promise<IUserRespo
 
 	const [users, error] = await fetchService<IUserResponse>(API_ENDPOINT, options)
 
-	console.log(error, users)
-
 	if (error || !users) return null
 
 	return users

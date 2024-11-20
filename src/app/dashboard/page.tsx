@@ -24,8 +24,6 @@ export default async function DashboardPage({
 
 	const mappedUsers = users?.items?.map(mapUserOutputToUserTable)
 
-	console.log(users, mappedUsers)
-
 	return (
 		<div className="min-h-[70vh]">
 			<DataTable

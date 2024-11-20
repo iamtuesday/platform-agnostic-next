@@ -10,8 +10,8 @@ const sidebarNavItems: { title: string; href: string; icon: keyof typeof dynamic
 	},
 
 	{
-		title: 'Video',
-		href: '/dashboard/video',
+		title: 'Streaming',
+		href: '/dashboard/streaming',
 		icon: 'video'
 	}
 	// {
