@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { verifyToken } from './actions/auth/actions'
 import { getSession, SESSION_NAME } from './lib/auth/session'
 
-const protectedRoutePatterns = [/^\/dashboard/, /^\/streaming/, /^\/reels/]
+const protectedRoutePatterns = [/^\/$/, /^\/dashboard/, /^\/streaming/, /^\/reels/]
 const authRoutes = ['/signin']
 
 export default async function middleware(req: NextRequest) {
