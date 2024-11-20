@@ -24,6 +24,8 @@ export default async function DashboardPage({
 
 	const mappedUsers = users?.items?.map(mapUserOutputToUserTable)
 
+	console.log(users, mappedUsers)
+
 	return (
 		<div className="min-h-[70vh]">
 			<DataTable
@@ -32,7 +34,7 @@ export default async function DashboardPage({
 				filterPlaceholder="Filtrar por nombre"
 				columns={usersTableColumns}
 				data={mappedUsers || []}
-				classNames={{ card: 'grid grid-cols-[auto_1fr] space-y-0 gap-y-1 gap-x-2' }}
+				classNames={{ card: 'grid  space-y-0 gap-y-1' }}
 			/>
 		</div>
 	)

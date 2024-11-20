@@ -1,6 +1,6 @@
 'use client'
 
-import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import { ColumnDef, flexRender, getCoreRowModel, SortingState, useReactTable } from '@tanstack/react-table'
 import * as React from 'react'
 
 import {
@@ -47,7 +47,7 @@ export const DataTable = <TData, TValue>({
 	isServerSide = false,
 	totalItems = 0
 }: DataTableProps<TData, TValue>) => {
-	// const [sorting, setSorting] = React.useState<SortingState>([])
+	const [sorting, setSorting] = React.useState<SortingState>([])
 	// const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
 	// const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
 	// const [rowSelection, setRowSelection] = React.useState({})
@@ -55,9 +55,12 @@ export const DataTable = <TData, TValue>({
 	const table = useReactTable({
 		data,
 		columns,
-		// onSortingChange: setSorting,
+		onSortingChange: setSorting,
 		// onColumnFiltersChange: setColumnFilters,
-		getCoreRowModel: getCoreRowModel()
+		getCoreRowModel: getCoreRowModel(),
+		state: {
+			sorting
+		}
 		// getPaginationRowModel: getPaginationRowModel(),
 		// getSortedRowModel: getSortedRowModel(),
 		// getFilteredRowModel: getFilteredRowModel(),

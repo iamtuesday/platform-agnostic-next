@@ -46,7 +46,7 @@ export const usersTableColumns: ColumnDef<IUserInfoTable>[] = [
 			)
 		},
 		cell: ({ row }) => (
-			<Typography size="sm" className="col-span-2 truncate">
+			<Typography size="sm" className="truncate">
 				{row.getValue('email')}
 			</Typography>
 		)
@@ -66,7 +66,14 @@ export const usersTableColumns: ColumnDef<IUserInfoTable>[] = [
 			)
 		},
 		cell: ({ row }) => {
-			return <Typography size="sm">{row.getValue('firstLogin')}</Typography>
+			return (
+				<Typography size="sm">
+					<Typography weight="semibold" size="sm" as="span" className="pr-2 laptop:hidden">
+						Primer Login:
+					</Typography>
+					{JSON.stringify(row.getValue('firstLogin'))}
+				</Typography>
+			)
 		}
 	},
 	{
@@ -84,7 +91,15 @@ export const usersTableColumns: ColumnDef<IUserInfoTable>[] = [
 			)
 		},
 		cell: ({ row }) => {
-			return <Typography size="sm">{row.getValue('country')}</Typography>
+			return (
+				<Typography size="sm">
+					{' '}
+					<Typography weight="semibold" size="sm" as="span" className="pr-2 laptop:hidden">
+						País:
+					</Typography>
+					{row.getValue('country')}
+				</Typography>
+			)
 		}
 	},
 	{
@@ -102,7 +117,14 @@ export const usersTableColumns: ColumnDef<IUserInfoTable>[] = [
 			)
 		},
 		cell: ({ row }) => {
-			return <Typography size="sm">{row.getValue('mode')}</Typography>
+			return (
+				<Typography size="sm">
+					<Typography weight="semibold" size="sm" as="span" className="pr-2 laptop:hidden">
+						Modo:
+					</Typography>
+					{row.getValue('mode')}
+				</Typography>
+			)
 		}
 	},
 	{
@@ -120,7 +142,14 @@ export const usersTableColumns: ColumnDef<IUserInfoTable>[] = [
 			)
 		},
 		cell: ({ row }) => {
-			return <Typography size="sm">{row.getValue('campus')}</Typography>
+			return (
+				<Typography size="sm">
+					<Typography size="sm" weight="semibold" as="span" className="pr-2 laptop:hidden">
+						Campus:
+					</Typography>
+					{row.getValue('campus')}
+				</Typography>
+			)
 		}
 	},
 	{
@@ -128,10 +157,10 @@ export const usersTableColumns: ColumnDef<IUserInfoTable>[] = [
 		header: () => <Typography size="sm">Acciones</Typography>,
 		cell: ({}) => {
 			return (
-				<Button variant="outline" className="w-full gap-2 [grid-area:download-btn]">
-					{/* <Typography size="sm" as="span" className="phone:hidden">
+				<Button variant="outline" className="w-full gap-2">
+					<Typography size="sm" as="span" className="pr-2 laptop:hidden">
 						Eliminar
-					</Typography> */}
+					</Typography>
 					<Delete className="h-4 w-4" />
 				</Button>
 			)
