@@ -1,5 +1,6 @@
 'use server'
 
+import { IUserResponse } from '@/interfaces'
 import { FetchOptions, fetchService } from '@/lib/http'
 import { VideoFormType } from '@/schemas'
 import { revalidateTag } from 'next/cache'
@@ -41,4 +42,24 @@ export const getVideo = async (): Promise<IVideoResponse | null> => {
 	if (error || !video) return null
 
 	return video
+}
+
+export const getUsers = async (params?: Record<string, any>): Promise<IUserResponse | null> => {
+	const API_ENDPOINT = `/user`
+
+	const options: FetchOptions = {
+		method: 'GET',
+		params,
+		next: {
+			revalidate: 1
+		}
+	}
+
+	const [users, error] = await fetchService<IUserResponse>(API_ENDPOINT, options)
+
+	console.log(error, users)
+
+	if (error || !users) return null
+
+	return users
 }
