@@ -2,14 +2,10 @@
 
 import {
 	ColumnDef,
-	ColumnFiltersState,
-	SortingState,
-	VisibilityState,
 	flexRender,
 	getCoreRowModel,
-	getFilteredRowModel,
-	getPaginationRowModel,
 	getSortedRowModel,
+	SortingState,
 	useReactTable
 } from '@tanstack/react-table'
 import * as React from 'react'
@@ -31,11 +27,12 @@ import {
 	TableHeader,
 	TableRow
 } from '@/components/ui'
+import { useQueryFilter } from '@/hooks/use-query-filter'
 import { cn } from '@/lib/utils'
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react'
 import { Typography } from '../molecules'
 
-interface DataTableProps<TData, TValue> {
+interface ServerDataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
 	data: TData[]
 	className?: string
@@ -44,46 +41,41 @@ interface DataTableProps<TData, TValue> {
 	}
 	filterBy?: string
 	filterPlaceholder?: string
+	isServerSide?: boolean
+	totalItems?: number
 }
 
-export const DataTable = <TData, TValue>({
+export const ServerDataTable = <TData, TValue>({
 	data,
 	columns,
 	classNames,
-	filterBy,
-	filterPlaceholder
-}: DataTableProps<TData, TValue>) => {
+	filterPlaceholder,
+	totalItems = 0
+}: ServerDataTableProps<TData, TValue>) => {
 	const [sorting, setSorting] = React.useState<SortingState>([])
-	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
-	const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
-	const [rowSelection, setRowSelection] = React.useState({})
 
 	const table = useReactTable({
 		data,
 		columns,
 		onSortingChange: setSorting,
-		onColumnFiltersChange: setColumnFilters,
 		getCoreRowModel: getCoreRowModel(),
-		getPaginationRowModel: getPaginationRowModel(),
 		getSortedRowModel: getSortedRowModel(),
-		getFilteredRowModel: getFilteredRowModel(),
-		onColumnVisibilityChange: setColumnVisibility,
-		onRowSelectionChange: setRowSelection,
 		state: {
-			sorting,
-			columnFilters,
-			columnVisibility,
-			rowSelection
+			sorting
 		}
 	})
+
+	const { handleSearch, getQuery, handleItemPerPage, handlePagination } = useQueryFilter()
 
 	return (
 		<div className={cn('w-full space-y-2 laptop:space-y-4')}>
 			<header>
 				<Input
 					placeholder={filterPlaceholder}
-					value={(table.getColumn(filterBy!)?.getFilterValue() as string) ?? ''}
-					onChange={event => table.getColumn(filterBy!)?.setFilterValue(event.target.value)}
+					onChange={e => {
+						handleSearch(e.target.value)
+					}}
+					defaultValue={getQuery('search')}
 					className="max-w-sm"
 				/>
 			</header>
@@ -147,14 +139,15 @@ export const DataTable = <TData, TValue>({
 					<Typography size="sm" weight="medium">
 						Filas por página
 					</Typography>
+
 					<Select
-						value={`${table.getState().pagination.pageSize}`}
+						value={getQuery('size') || '10'}
 						onValueChange={value => {
-							table.setPageSize(Number(value))
+							handleItemPerPage(value)
 						}}
 					>
 						<SelectTrigger className="h-8 w-[70px]">
-							<SelectValue placeholder={table.getState().pagination.pageSize} />
+							<SelectValue placeholder={getQuery('size')} />
 						</SelectTrigger>
 						<SelectContent side="top">
 							{[10, 20, 30, 40, 50].map(pageSize => (
@@ -164,54 +157,89 @@ export const DataTable = <TData, TValue>({
 							))}
 						</SelectContent>
 					</Select>
+					{/* )} */}
 				</section>
 
 				<section className="flex w-full items-center justify-between gap-2 tablet:w-max tablet:justify-start">
 					<Typography size="sm">
-						Página {table.getState().pagination.pageIndex + 1} de {table.getPageCount()}
+						Página {getQuery('page') || 1} de {Math.ceil(totalItems / (Number(getQuery('size')) || 10))}
 					</Typography>
 
-					<div className="flex items-center space-x-2">
-						<Button
-							variant="outline"
-							className="hidden h-8 w-8 p-0 lg:flex"
-							onClick={() => table.setPageIndex(0)}
-							disabled={!table.getCanPreviousPage()}
-						>
-							<span className="sr-only">Go to first page</span>
-							<ChevronsLeft className="h-4 w-4" />
-						</Button>
+					<>
+						<div className="flex items-center space-x-2">
+							<Button
+								onClick={() => {
+									const firstPage = 1
+									handlePagination(firstPage)
+								}}
+								disabled={(() => {
+									const currentPage = Number(getQuery('page')) || 1
+									return currentPage === 1
+								})()}
+								variant="outline"
+								className="hidden h-8 w-8 p-0 lg:flex"
+							>
+								<span className="sr-only">Go to first page</span>
+								<ChevronsLeft className="h-4 w-4" />
+							</Button>
 
-						<Button
-							variant="outline"
-							className="h-8 w-8 p-0"
-							onClick={() => table.previousPage()}
-							disabled={!table.getCanPreviousPage()}
-						>
-							<span className="sr-only">Go to previous page</span>
-							<ChevronLeft className="h-4 w-4" />
-						</Button>
+							<Button
+								onClick={() => {
+									const currentPage = Number(getQuery('page')) || 1
+									const prevPage = Math.max(currentPage - 1, 1)
+									handlePagination(prevPage)
+								}}
+								disabled={(() => {
+									const currentPage = Number(getQuery('page')) || 1
+									return currentPage === 1
+								})()}
+								variant="outline"
+								className="h-8 w-8 p-0"
+							>
+								<span className="sr-only">Go to previous page</span>
+								<ChevronLeft className="h-4 w-4" />
+							</Button>
 
-						<Button
-							variant="outline"
-							className="h-8 w-8 p-0"
-							onClick={() => table.nextPage()}
-							disabled={!table.getCanNextPage()}
-						>
-							<span className="sr-only">Go to next page</span>
-							<ChevronRight className="h-4 w-4" />
-						</Button>
+							<Button
+								onClick={() => {
+									const currentPage = Number(getQuery('page')) || 1
+									const nextPage = currentPage + 1
+									handlePagination(nextPage)
+								}}
+								disabled={(() => {
+									const size = Number(getQuery('size')) || 10
+									const lastPage = Math.ceil(totalItems / size)
+									const currentPage = Number(getQuery('page')) || 1
+									return currentPage >= lastPage
+								})()}
+								variant="outline"
+								className="h-8 w-8 p-0"
+							>
+								<span className="sr-only">Go to next page</span>
+								<ChevronRight className="h-4 w-4" />
+							</Button>
 
-						<Button
-							variant="outline"
-							className="hidden h-8 w-8 p-0 lg:flex"
-							onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-							disabled={!table.getCanNextPage()}
-						>
-							<span className="sr-only">Go to last page</span>
-							<ChevronsRight className="h-4 w-4" />
-						</Button>
-					</div>
+							<Button
+								onClick={() => {
+									const size = Number(getQuery('size')) || 10
+									const lastPage = Math.ceil(totalItems / size)
+									handlePagination(lastPage)
+								}}
+								disabled={(() => {
+									const size = Number(getQuery('size')) || 10
+									const lastPage = Math.ceil(totalItems / size)
+									const currentPage = Number(getQuery('page')) || 1
+									return currentPage >= lastPage
+								})()}
+								variant="outline"
+								className="hidden h-8 w-8 p-0 lg:flex"
+							>
+								<span className="sr-only">Go to last page</span>
+								<ChevronsRight className="h-4 w-4" />
+							</Button>
+						</div>
+						{/* )} */}
+					</>
 				</section>
 			</footer>
 		</div>
