@@ -12,14 +12,15 @@ import { DataTable } from './data-table'
 
 interface DashboardVideosTableProps {
 	videos: IReelResponse[]
+	reelType: ReelTypeEnum
 }
 
-export const DashboardVideosTable = ({ videos }: DashboardVideosTableProps) => {
+export const DashboardVideosTable = ({ videos, reelType }: DashboardVideosTableProps) => {
 	return (
 		<DataTable
 			customBar={
 				<CustomSheet
-					title="Crear un video"
+					title={'Crear un ' + reelType}
 					trigger={
 						<Button variant="outline" className="w-max">
 							Crear
@@ -31,7 +32,7 @@ export const DashboardVideosTable = ({ videos }: DashboardVideosTableProps) => {
 						return (
 							<ReelForm
 								defaultValues={{
-									type: ReelTypeEnum.video
+									type: reelType
 								}}
 								handleOnSubmit={async data => {
 									await createReel(data)

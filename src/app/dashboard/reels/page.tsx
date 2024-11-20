@@ -1,37 +1,20 @@
-import { getUsers } from '@/actions/dashboard/actions'
-import { usersTableColumns } from '@/components/molecules'
-import { DataTable } from '@/components/organisms'
-import { mapUserOutputToUserTable } from '@/mappers'
+import { getReels } from '@/actions/dashboard/actions'
+import { ReelTypeEnum } from '@/app/enums'
+import { DashboardVideosTable } from '@/components/organisms'
+import { mapReelOutputToReelTable } from '@/mappers/reel-output-to-reel-table.map'
 
-export default async function DashboardPage({
-	searchParams
-}: {
-	searchParams?: {
-		search?: string
-		page?: string
-		size?: string
-	}
-}) {
+export default async function DashboardPage() {
 	const params = {
-		pageSize: Number(searchParams?.size) || 10,
-		pageNumber: Number(searchParams?.page) || 1,
-		term: searchParams?.search || ''
+		type: 'reel'
 	}
 
-	const users = await getUsers(params)
+	const videos = await getReels(params)
 
-	const mappedUsers = users?.items?.map(mapUserOutputToUserTable)
+	const mappedVideos = videos?.map(mapReelOutputToReelTable)
 
 	return (
 		<div className="min-h-[70vh]">
-			<DataTable
-				isServerSide
-				totalItems={users?.totalItems || 0}
-				filterPlaceholder="Filtrar por nombre"
-				columns={usersTableColumns}
-				data={mappedUsers || []}
-				classNames={{ card: 'grid  space-y-0 gap-y-1' }}
-			/>
+			<DashboardVideosTable reelType={ReelTypeEnum.reel} videos={mappedVideos || []} />
 		</div>
 	)
 }

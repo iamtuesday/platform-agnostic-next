@@ -92,7 +92,7 @@ export const videosTableColumns: ColumnDef<IReelResponse>[] = [
 					</Button>
 
 					<CustomSheet
-						title="Actualizar el video"
+						title={'Actualizar el ' + original.type}
 						trigger={
 							<Button variant="outline" size="icon" className="w-full">
 								<Pencil className="h-4 w-4" />

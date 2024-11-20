@@ -1,4 +1,5 @@
 import { getReels } from '@/actions/dashboard/actions'
+import { ReelTypeEnum } from '@/app/enums'
 import { DashboardVideosTable } from '@/components/organisms'
 import { mapReelOutputToReelTable } from '@/mappers/reel-output-to-reel-table.map'
 
@@ -13,7 +14,7 @@ export default async function VideosPage() {
 
 	return (
 		<div className="min-h-[70vh]">
-			<DashboardVideosTable videos={mappedVideos || []} />
+			<DashboardVideosTable reelType={ReelTypeEnum.video} videos={mappedVideos || []} />
 		</div>
 	)
 }
