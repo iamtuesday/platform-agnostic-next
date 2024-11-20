@@ -68,6 +68,9 @@ export const fetchService = async <T>(url: string, options: FetchOptions): Promi
 			try {
 				errorBody = await response.json()
 			} catch (jsonError) {
+				if (jsonError instanceof Error) {
+					errorBody = { message: jsonError.message }
+				}
 				errorBody = { message: response.statusText }
 			}
 
