@@ -29,8 +29,7 @@ export default async function DashboardPage({
 			<DataTable
 				isServerSide
 				totalItems={users?.totalItems || 0}
-				filterBy="email"
-				filterPlaceholder="Filtrar por email"
+				filterPlaceholder="Filtrar por nombre"
 				columns={usersTableColumns}
 				data={mappedUsers || []}
 				classNames={{ card: 'grid grid-cols-[auto_1fr] space-y-0 gap-y-1 gap-x-2' }}
