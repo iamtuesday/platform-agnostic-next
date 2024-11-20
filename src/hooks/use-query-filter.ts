@@ -48,6 +48,20 @@ export function useQueryFilter() {
 		updateParams('size', size)
 	}
 
+	const handleItemPerPage = (size: string): void => {
+		const params = new URLSearchParams(searchParams)
+
+		if (size) params.set('size', size)
+		else params.delete('size')
+
+		params.delete('page')
+		params.set('page', '1')
+
+		const orderedParams: URLSearchParams = orderParams(params)
+
+		replace(`${pathname}?${orderedParams.toString()}`)
+	}
+
 	const getQuery = (key: string): string => {
 		const value = searchParams.get(key)
 
@@ -60,6 +74,7 @@ export function useQueryFilter() {
 		handleSearch,
 		handlePagination,
 		handlePageSize,
+		handleItemPerPage,
 		getQuery
 	}
 }
