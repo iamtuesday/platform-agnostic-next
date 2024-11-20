@@ -1,6 +1,6 @@
 import { getUsers } from '@/actions/dashboard/actions'
 import { usersTableColumns } from '@/components/molecules'
-import { DataTable } from '@/components/organisms'
+import { ServerDataTable } from '@/components/organisms'
 import { mapUserOutputToUserTable } from '@/mappers'
 
 export default async function DashboardPage({
@@ -18,16 +18,13 @@ export default async function DashboardPage({
 		term: searchParams?.search || ''
 	}
 
-	console.log(params)
-
 	const users = await getUsers(params)
 
 	const mappedUsers = users?.items?.map(mapUserOutputToUserTable)
 
 	return (
 		<div className="min-h-[70vh]">
-			<DataTable
-				isServerSide
+			<ServerDataTable
 				totalItems={users?.totalItems || 0}
 				filterPlaceholder="Filtrar por nombre"
 				columns={usersTableColumns}
