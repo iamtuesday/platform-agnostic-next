@@ -39,7 +39,17 @@ export const ReelForm = ({ defaultValues, handleOnSubmit }: ReelFormProps) => {
 			<form onSubmit={handleSubmit(onSubmit)} className="w-full">
 				<TextField id="title" label="Titulo" control={control} name="title" placeholder="Titulo del video" />
 
-				<TextField id="url" label="Url del video" control={control} name="url" placeholder="https://" />
+				<TextField
+					id="url"
+					as={Textarea}
+					classNames={{
+						field: 'max-h-[200px]'
+					}}
+					label="Url del video"
+					control={control}
+					name="url"
+					placeholder="https://"
+				/>
 
 				<TextField
 					classNames={{

@@ -12,4 +12,6 @@ const socketConfig = {
 	}
 }
 
+console.log(socketConfig)
+
 export const socket = io(socketConfig.url!, socketConfig.options)

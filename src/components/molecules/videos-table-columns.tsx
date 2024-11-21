@@ -49,7 +49,7 @@ export const videosTableColumns: ColumnDef<IReelResponse>[] = [
 			)
 		},
 		cell: ({ row }) => (
-			<Typography size="sm" className="max-w-[30ch] truncate">
+			<Typography size="sm" className="line-clamp-2 max-w-[30ch] truncate">
 				{row.getValue('url')}
 			</Typography>
 		)
