@@ -1,6 +1,8 @@
+import { getReels } from '@/actions/dashboard/actions'
 import { ReelCard, Typography } from '@/components/molecules'
 import { Separator } from '@/components/ui'
 import { IReelResponse } from '@/interfaces'
+import { mapReelOutputToReelTable } from '@/mappers/reel-output-to-reel-table.map'
 import { ReelTypeEnum } from '../enums'
 
 const reels: IReelResponse[] = [
@@ -49,13 +51,13 @@ const reels: IReelResponse[] = [
 ]
 
 export default async function ReelsPage() {
-	// const params = {
-	// 	type: 'reel'
-	// }
+	const params = {
+		type: 'reel'
+	}
 
-	// const videos = await getReels(params)
+	const videos = await getReels(params)
 
-	// const mappedVideos = videos?.map(mapReelOutputToReelTable)
+	const mappedVideos = videos?.map(mapReelOutputToReelTable)
 
 	return (
 		<div className="mx-auto w-full max-w-6xl space-y-10 px-4 py-10 tablet:px-0">
@@ -66,7 +68,7 @@ export default async function ReelsPage() {
 			<Separator />
 
 			<main className="grid gap-4 phone:grid-cols-[repeat(auto-fill,minmax(256px,1fr))]">
-				{reels?.map(video => {
+				{mappedVideos?.map(video => {
 					return <ReelCard key={video.id} reel={video} />
 				})}
 			</main>
