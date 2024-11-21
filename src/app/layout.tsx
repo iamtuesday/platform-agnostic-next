@@ -1,6 +1,7 @@
 import { Footer, Navigation } from '@/components/globals'
 import { ToastProvider } from '@/components/ui'
 import { getSession } from '@/lib/auth/session'
+import { SocketProvider } from '@/socket/socket.context'
 import type { Metadata } from 'next'
 import { SessionProvider } from 'next-auth/react'
 import { Inter } from 'next/font/google'
@@ -67,14 +68,16 @@ export default async function RootLayout({
 			<body
 				className={`${clashGrotesk.variable} ${plusJakarta.variable} ${dharmaGothic.variable} ${inter.variable} grid min-h-[100dvh] grid-rows-[auto_1fr_auto] font-inter antialiased`}
 			>
-				<ToastProvider>
-					<SessionProvider>
-						<Navigation session={session} />
-						{children}
-						<Footer />
-						<Toaster />
-					</SessionProvider>
-				</ToastProvider>
+				<SocketProvider>
+					<ToastProvider>
+						<SessionProvider>
+							<Navigation session={session} />
+							{children}
+							<Footer />
+							<Toaster />
+						</SessionProvider>
+					</ToastProvider>
+				</SocketProvider>
 			</body>
 		</html>
 	)
