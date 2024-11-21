@@ -1,3 +1,3 @@
 export default function ReelPage() {
-	return <div></div>
+	return <main>{/* <ReelCard key={video.id} reel={video} /> */}</main>
 }
