@@ -129,3 +129,13 @@ export const createReel = async (reelFormData: ReelFormSchemaType): Promise<void
 	revalidatePath('/dashboard/reel')
 	revalidatePath('/')
 }
+
+export const revalidateCacheByPath = (paths: string | string[]) => {
+	if (Array.isArray(paths)) {
+		paths.forEach(path => {
+			revalidatePath(path)
+		})
+	}
+
+	if (typeof paths === 'string') revalidatePath(paths)
+}

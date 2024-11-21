@@ -1,8 +1,7 @@
-import { createReel, getReels } from '@/actions/dashboard/actions'
-import { ReelTypeEnum } from '@/app/enums'
+import { getReels } from '@/actions/dashboard/actions'
 import { Typography } from '@/components/molecules'
 import { videosTableColumns } from '@/components/molecules/videos-table-columns'
-import { DashboardVideosTable } from '@/components/organisms'
+import { CreateReelSheet, DataTable } from '@/components/organisms'
 import { mapReelOutputToReelTable } from '@/mappers/reel-output-to-reel-table.map'
 
 export default async function DashboardPage() {
@@ -19,9 +18,11 @@ export default async function DashboardPage() {
 			<Typography size="xl" weight="semibold">
 				Reels
 			</Typography>
-			<DashboardVideosTable
-				handleCreateSubmit={createReel}
-				reelType={ReelTypeEnum.video}
+
+			<DataTable
+				filterBy="title"
+				filterPlaceholder="Filtrar por el título"
+				customBar={<CreateReelSheet />}
 				columns={videosTableColumns}
 				data={mappedVideos || []}
 			/>
