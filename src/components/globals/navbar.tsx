@@ -55,6 +55,8 @@ export const Navigation = ({ session }: NavigationProps) => {
 		</Link>
 	)
 
+	const sessionExist = session?.userId
+
 	return (
 		<nav
 			className={cn(
@@ -77,15 +79,19 @@ export const Navigation = ({ session }: NavigationProps) => {
 
 					<section className="hidden items-center space-x-1 md:flex">
 						<ul className="flex items-center gap-x-[32px]">
-							<li>
-								<LiveButton />
-							</li>
+							{!!sessionExist ? (
+								<>
+									<li>
+										<LiveButton />
+									</li>
 
-							<MenuItems />
+									<MenuItems />
+								</>
+							) : null}
 
 							<li>
 								{/* auth buttons */}
-								{!!session?.userId ? (
+								{!!sessionExist ? (
 									<Button
 										onClick={async () => {
 											const errorMessage = await logout()
@@ -105,51 +111,58 @@ export const Navigation = ({ session }: NavigationProps) => {
 						</ul>
 					</section>
 
-					{/* Sheet open */}
-					<button className="text-white md:hidden" onClick={() => setIsOpen(!isOpen)}>
-						<AlignLeft size="26" />
-					</button>
+					{!!sessionExist ? (
+						<button className="text-white md:hidden" onClick={() => setIsOpen(!isOpen)}>
+							<AlignLeft size="26" />
+						</button>
+					) : (
+						<Button className="md:hidden" onClick={() => redirectToLogin()}>
+							Sign In
+						</Button>
+					)}
 				</div>
 			</div>
 
 			{/* Sheet */}
-			<section
-				className={cn(
-					isOpen ? 'h-[350px]' : 'h-0',
-					'absolute z-10 max-h-max w-full overflow-hidden border-b border-[#333] bg-foreground text-white transition-[height] duration-200 md:hidden'
-				)}
-			>
-				<nav className="flex flex-col px-4 py-8">
-					<ul className="flex flex-col space-y-6">
-						<li>
-							<LiveButton />
-						</li>
+			{!!sessionExist ? (
+				<section
+					className={cn(
+						isOpen ? 'h-[350px]' : 'h-0',
+						'absolute z-10 max-h-max w-full overflow-hidden border-b border-[#333] bg-foreground text-white transition-[height] duration-200 md:hidden'
+					)}
+				>
+					<nav className="flex flex-col px-4 py-8">
+						<ul className="flex flex-col space-y-6">
+							<li>
+								<LiveButton />
+							</li>
 
-						<MenuItems />
+							<MenuItems />
 
-						<li>
-							{!!session?.userId ? (
-								<Button
-									onClick={async () => {
-										const errorMessage = await logout()
+							<li>
+								{!!session?.userId ? (
+									<Button
+										onClick={async () => {
+											const errorMessage = await logout()
 
-										if (errorMessage) {
-											toast.error(errorMessage.msg)
-											return
-										}
+											if (errorMessage) {
+												toast.error(errorMessage.msg)
+												return
+											}
 
-										setIsOpen(false)
-									}}
-								>
-									Log Out
-								</Button>
-							) : (
-								<Button onClick={() => redirectToLogin()}>Sign In</Button>
-							)}
-						</li>
-					</ul>
-				</nav>
-			</section>
+											setIsOpen(false)
+										}}
+									>
+										Log Out
+									</Button>
+								) : (
+									<Button onClick={() => redirectToLogin()}>Sign In</Button>
+								)}
+							</li>
+						</ul>
+					</nav>
+				</section>
+			) : null}
 		</nav>
 	)
 }
