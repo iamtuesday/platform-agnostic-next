@@ -29,10 +29,7 @@ export default function HomeExperience() {
 				</header>
 
 				<footer className="inline-block">
-					<Link
-						href="/red-social"
-						className={cn(buttonVariants({ size: 'lg' }), 'pointer-events-none bg-foreground/50 text-base')}
-					>
+					<Link href="/reels" className={cn(buttonVariants({ size: 'lg' }), 'bg-foreground/50 text-base')}>
 						Videos Feed
 					</Link>
 				</footer>

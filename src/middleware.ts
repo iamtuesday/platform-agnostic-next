@@ -31,8 +31,6 @@ export default async function middleware(req: NextRequest) {
 
 	const isTokenValid = await verifyToken()
 
-	console.log('isTokenValid', isTokenValid)
-
 	/**
 	 * Si el token no es válido, eliminar la sesión simplemente eliminando la cookie
 	 */

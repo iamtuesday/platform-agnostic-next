@@ -57,6 +57,8 @@ export default async function ReelsPage() {
 
 	const videos = await getReels(params)
 
+	console.log(videos)
+
 	const mappedVideos = videos?.map(mapReelOutputToReelTable)
 
 	return (

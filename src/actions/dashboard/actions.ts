@@ -67,7 +67,7 @@ export const getReels = async (params?: Record<string, any>): Promise<IReelRespo
 
 	const options: FetchOptions = {
 		method: 'GET',
-		params: params,
+		params,
 		next: {
 			revalidate: 1
 		}
