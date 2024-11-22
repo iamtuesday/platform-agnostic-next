@@ -1,3 +1,4 @@
+export * from './animated-title.componen'
 export * from './reel-card.component'
 export * from './reel-form.component'
 export * from './text-field.component'
