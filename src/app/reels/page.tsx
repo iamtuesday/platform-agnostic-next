@@ -69,6 +69,9 @@ export default async function ReelsPage() {
 
 			<Separator />
 
+			{/**
+			 * Mover a un componente del cliente para usar el socket
+			 */}
 			<main className="grid gap-4 phone:grid-cols-[repeat(auto-fill,minmax(256px,1fr))]">
 				{mappedVideos?.map(video => {
 					return <ReelCard key={video.id} reel={video} />
