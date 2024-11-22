@@ -1,5 +1,6 @@
 'use client'
 
+import { revalidateCacheByPath } from '@/actions/dashboard/actions'
 import { socket } from '@/lib/socket/client'
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import { Socket } from 'socket.io-client'
@@ -38,6 +39,11 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
 		socket.on('disconnect', () => {
 			console.log('Socket disconnected')
 			_setSocket(null)
+		})
+
+		socket.on('new_reel', () => {
+			console.log('Listen new_reel socket event')
+			revalidateCacheByPath(['/reels', '/dashboard/reels'])
 		})
 
 		return () => {

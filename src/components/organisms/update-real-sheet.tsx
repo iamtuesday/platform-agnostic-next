@@ -1,19 +1,27 @@
 'use client'
 
+import { IReelResponse } from '@/interfaces'
 import { ReelFormSchemaType } from '@/schemas'
 import { useSocket } from '@/socket/socket.context'
-import { Plus } from 'lucide-react'
+import { Pencil } from 'lucide-react'
+import { toast } from 'sonner'
 import { ReelForm } from '../molecules'
 import { Button, CustomSheet } from '../ui'
 
-export const CreateReelSheet = () => {
+export const UpdateReelSheet = ({ defaultValues }: { defaultValues: IReelResponse }) => {
 	const { socket } = useSocket()
 
-	const createReel = (data: ReelFormSchemaType): void => {
+	const updateReel = (data: ReelFormSchemaType): void => {
 		try {
+			if (!data.id) {
+				toast.error('Error al actualizar el Reel.')
+				return
+			}
+
 			socket?.emit(
 				'reel',
 				{
+					id: defaultValues.id,
 					url: data.url,
 					title: data.title,
 					description: data.description
@@ -32,11 +40,10 @@ export const CreateReelSheet = () => {
 
 	return (
 		<CustomSheet
-			title={'Crear un nuevo Reel'}
+			title={'Actualizar el Reel'}
 			trigger={
-				<Button variant="outline" className="w-max">
-					Crear
-					<Plus className="h-4 w-4" />
+				<Button variant="outline" size="icon" className="w-full">
+					<Pencil className="h-4 w-4" />
 				</Button>
 			}
 		>
@@ -44,9 +51,10 @@ export const CreateReelSheet = () => {
 				return (
 					<ReelForm
 						handleOnSubmit={async data => {
-							createReel(data)
+							updateReel(data)
 							handleOpen(false)
 						}}
+						defaultValues={defaultValues}
 					/>
 				)
 			}}

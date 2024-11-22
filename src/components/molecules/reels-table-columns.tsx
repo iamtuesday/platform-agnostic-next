@@ -1,15 +1,14 @@
 'use client'
 
-import { deleteReel, updateReel } from '@/actions/dashboard/actions'
+import { deleteReel } from '@/actions/dashboard/actions'
 import { IReelResponse } from '@/interfaces'
 import { ColumnDef } from '@tanstack/react-table'
-import { ArrowUpDown, Pencil, Trash2 } from 'lucide-react'
+import { ArrowUpDown, Trash2 } from 'lucide-react'
+import { UpdateReelSheet } from '../organisms/update-real-sheet'
 import { Button } from '../ui'
-import { CustomSheet } from '../ui/custom-sheet.component'
-import { ReelForm } from './reel-form.component'
 import { Typography } from './typography.component'
 
-export const videosTableColumns: ColumnDef<IReelResponse>[] = [
+export const reelsTableColumns: ColumnDef<IReelResponse>[] = [
 	{
 		accessorKey: 'title',
 		header: ({ column }) => {
@@ -95,26 +94,7 @@ export const videosTableColumns: ColumnDef<IReelResponse>[] = [
 						<Trash2 className="h-4 w-4" />
 					</Button>
 
-					<CustomSheet
-						title={'Actualizar el video'}
-						trigger={
-							<Button variant="outline" size="icon" className="w-full">
-								<Pencil className="h-4 w-4" />
-							</Button>
-						}
-					>
-						{handleOpen => {
-							return (
-								<ReelForm
-									handleOnSubmit={async data => {
-										await updateReel(data)
-										handleOpen(false)
-									}}
-									defaultValues={original}
-								/>
-							)
-						}}
-					</CustomSheet>
+					<UpdateReelSheet defaultValues={original} />
 				</div>
 			)
 		}

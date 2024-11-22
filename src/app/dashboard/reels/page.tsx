@@ -1,6 +1,6 @@
 import { getReels } from '@/actions/dashboard/actions'
 import { Typography } from '@/components/molecules'
-import { videosTableColumns } from '@/components/molecules/videos-table-columns'
+import { reelsTableColumns } from '@/components/molecules/reels-table-columns'
 import { CreateReelSheet, DataTable } from '@/components/organisms'
 import { mapReelOutputToReelTable } from '@/mappers/reel-output-to-reel-table.map'
 
@@ -23,7 +23,7 @@ export default async function DashboardPage() {
 				filterBy="title"
 				filterPlaceholder="Filtrar por el título"
 				customBar={<CreateReelSheet />}
-				columns={videosTableColumns}
+				columns={reelsTableColumns}
 				data={mappedVideos || []}
 			/>
 		</main>
