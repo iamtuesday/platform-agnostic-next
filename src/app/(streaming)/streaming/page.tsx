@@ -1,23 +1,10 @@
 import { getStreamingVideo } from '@/actions/dashboard/actions'
 import { Typography } from '@/components/molecules'
-import { Mdx } from '@/components/ui'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 
 export default async function StreamingPage() {
 	const video = await getStreamingVideo()
-
-	const iframeUrl = `<iframe
-			title="vimeo-player"
-			className="absolute top-0 left-0 w-full h-full"
-			src="https://player.vimeo.com/video/642263700?h=5bb50fc9fb"
-			width="640"
-			height="360"
-			allowFullScreen
-		/>
-	`
-
-	const iframeUrlFormat = video?.url ? video.url : iframeUrl
 
 	return (
 		<div className="relative flex flex-col bg-black pb-16">
@@ -41,18 +28,24 @@ export default async function StreamingPage() {
 				}}
 			></div>
 
-			<main className="relative z-30 mx-auto w-full max-w-6xl space-y-6 px-4 py-10 laptop:px-0">
+			<main className="relative z-30 mx-auto flex h-full w-full max-w-6xl flex-col place-content-center space-y-6 px-4 py-10 laptop:px-0">
 				<header>
 					<Typography as="h1" className={cn('text-center text-white')} size="4xl" weight="semibold">
-						Conferencia Magistral en Vivo
+						Congreso Internacional de Inteligencia Artificial 2024
 					</Typography>
 				</header>
 
-				<div className="overflow-hidden rounded-lg bg-black shadow-lg">
-					<div className="relative pt-[56.25%]">
-						<Mdx>{iframeUrlFormat.replace(/<iframe/gi, `<iframe className="absolute top-0 left-0 w-full h-full"`)}</Mdx>
-					</div>
-				</div>
+				<section className="overflow-hidden rounded-lg bg-black shadow-lg">
+					<iframe
+						src={
+							video?.url ||
+							'https://player.vimeo.com/video/1029393916?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479'
+						}
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowFullScreen
+						className="aspect-video h-full w-full"
+					/>
+				</section>
 			</main>
 		</div>
 	)

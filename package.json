@@ -21,6 +21,7 @@
 		"@radix-ui/react-tooltip": "^1.1.4",
 		"@tanstack/react-table": "^8.20.5",
 		"add": "^2.0.6",
+		"add-to-calendar-button-react": "^2.7.3",
 		"bcrypt": "^5.1.1",
 		"card": "^2.5.4",
 		"class-variance-authority": "^0.7.0",
