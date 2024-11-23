@@ -2342,6 +2342,11 @@ electron-to-chromium@^1.5.41:
   resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.5.50.tgz"
   integrity sha512-eMVObiUQ2LdgeO1F/ySTXsvqvxb6ZH2zPGaMYsWzRDdOddUa77tdmI0ltg+L16UpbWdhPmuF3wIQYyQq65WfZw==
 
+embla-carousel-auto-height@^8.5.1:
+  version "8.5.1"
+  resolved "https://registry.npmjs.org/embla-carousel-auto-height/-/embla-carousel-auto-height-8.5.1.tgz"
+  integrity sha512-pH0LlCEX6D2uNf0zuEHPL14YCnlJK+xIlhjcWNy53TG+9qDPgUUwBLBoAdbWro+8/MzqzVf+kHDgsy25jkzu4g==
+
 embla-carousel-autoplay@^8.5.1:
   version "8.5.1"
   resolved "https://registry.npmjs.org/embla-carousel-autoplay/-/embla-carousel-autoplay-8.5.1.tgz"

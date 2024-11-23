@@ -279,7 +279,7 @@ const CarouselDotsButton = React.forwardRef<HTMLDivElement, CarouselDotsButtonPr
 	const { onDotButtonClick, selectedIndex, scrollSnaps } = useCarousel()
 
 	return (
-		<div className="flex items-center justify-center gap-3" {...props} ref={ref}>
+		<div className="flex items-center justify-center gap-2.5" {...props} ref={ref}>
 			{scrollSnaps.map((_, index) => (
 				<button
 					key={index}
