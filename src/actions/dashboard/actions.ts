@@ -3,7 +3,7 @@
 import { IReelResponse, IUserResponse } from '@/interfaces'
 import { FetchOptions, fetchService } from '@/lib/http'
 import { ReelFormSchemaType, VideoFormType } from '@/schemas'
-import { revalidatePath, revalidateTag } from 'next/cache'
+import { revalidatePath } from 'next/cache'
 
 interface IVideoResponse {
 	id: string
@@ -23,7 +23,8 @@ export const updateStreamingVideo = async (videoFormData: VideoFormType): Promis
 
 	await fetchService<IVideoResponse>(API_ENDPOINT, options)
 
-	revalidateTag('streaming-video')
+	revalidatePath('/streaming')
+	revalidatePath('/dashboard/streaming')
 }
 
 export const getStreamingVideo = async (): Promise<IVideoResponse | null> => {
@@ -32,8 +33,7 @@ export const getStreamingVideo = async (): Promise<IVideoResponse | null> => {
 	const options: FetchOptions = {
 		method: 'GET',
 		next: {
-			revalidate: 1,
-			tags: ['streaming-video']
+			revalidate: 1
 		}
 	}
 
