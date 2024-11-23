@@ -60,7 +60,7 @@ export const ReelForm = ({ defaultValues, handleOnSubmit }: ReelFormProps) => {
 					label="Descripción"
 					name="description"
 					control={control}
-					placeholder="https://"
+					placeholder="Description"
 				/>
 
 				<footer>
