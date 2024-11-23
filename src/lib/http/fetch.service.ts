@@ -43,7 +43,7 @@ export const fetchService = async <T>(url: string, options: FetchOptions): Promi
 		const requestOptions: RequestInit = {
 			method,
 			headers: { ...defaultHeaders, ...headers },
-			...next
+			next
 		}
 
 		// Manejar el método POST y PUT
