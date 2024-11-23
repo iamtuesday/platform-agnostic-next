@@ -62,7 +62,7 @@ export default async function ReelsPage() {
 	const mappedVideos = videos?.map(mapReelOutputToReelTable)
 
 	return (
-		<div className="mx-auto w-full max-w-6xl space-y-10 px-4 py-10 tablet:px-0">
+		<div className="mx-auto w-full max-w-6xl space-y-10 px-4 py-10 laptop:px-0">
 			<Typography size="4xl" as="h1" weight="semibold">
 				Reels
 			</Typography>
