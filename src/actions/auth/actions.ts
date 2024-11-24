@@ -44,7 +44,8 @@ export const login = async (signInData: SignInFormType): Promise<errorMsgType | 
 
 	await createSession(session)
 
-	redirect('/streaming')
+	// redirect('/streaming')
+	redirect('/')
 }
 
 export const logout = async (): Promise<errorMsgType | void> => {

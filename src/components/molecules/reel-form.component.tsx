@@ -43,7 +43,7 @@ export const ReelForm = ({ defaultValues, handleOnSubmit }: ReelFormProps) => {
 					id="url"
 					as={Textarea}
 					classNames={{
-						field: 'max-h-[200px]'
+						field: 'min-h-[200px]'
 					}}
 					label="Url del video"
 					control={control}
@@ -53,7 +53,7 @@ export const ReelForm = ({ defaultValues, handleOnSubmit }: ReelFormProps) => {
 
 				<TextField
 					classNames={{
-						field: 'max-h-[300px]'
+						field: 'min-h-[150px]'
 					}}
 					as={Textarea}
 					id="description"

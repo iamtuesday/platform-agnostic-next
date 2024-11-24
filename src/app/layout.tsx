@@ -46,10 +46,9 @@ const plusJakarta = localFont({
 })
 
 export const metadata: Metadata = {
-	title:
-		'PottencIA – Programa innovador diseñado para dar a los estudiantes las herramientas necesarias para potenciar sus oportunidades académicas, laborales y de empleabilidad en el mundo actual.',
+	title: 'Pottencia',
 	description:
-		'PottencIA – Programa innovador diseñado para dar a los estudiantes las herramientas necesarias para potenciar sus oportunidades académicas, laborales y de empleabilidad en el mundo actual.',
+		'- Programa innovador diseñado para dar a los estudiantes las herramientas necesarias para potenciar sus oportunidades académicas, laborales y de empleabilidad en el mundo actual.',
 	icons: {
 		icon: '/assets/favicon-potencia-32x32.svg'
 	}

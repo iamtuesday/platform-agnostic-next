@@ -34,7 +34,7 @@ export const SignInForm = () => {
 		<Form {...form}>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className="flex-1 rounded-lg bg-gray-50 px-6 py-16">
-					<h1 className={`${lusitana.className} mb-3 text-2xl`}>Please log in to continue.</h1>
+					<h1 className={`${lusitana.className} mb-3 text-2xl`}>Inicie sesión para continuar.</h1>
 					<div className="w-full space-y-4">
 						<TextField
 							id="email"
@@ -57,7 +57,8 @@ export const SignInForm = () => {
 						</Link> */}
 
 						<Typography as="p" className="text-center text-sm text-gray-600">
-							Only if you are registered on the page will you be able to access it, if not, please contact us.
+							Sólo si estás registrado en la página podrás acceder a ella, si no, por favor contacta con los
+							administradores.
 						</Typography>
 					</div>
 				</div>

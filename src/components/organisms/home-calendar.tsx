@@ -15,7 +15,7 @@ export const HomeCalendar = () => {
 					)}
 					size="8xl"
 				>
-					28 Noviembre
+					26, 27 y 28 de Noviembre
 				</Typography>
 
 				<Typography as="p" className={cn('mt-4 text-center text-white')} weight="semibold" size="2xl">

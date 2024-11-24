@@ -31,8 +31,6 @@ export const UpdateReelSheet = ({ defaultValues }: { defaultValues: IReelRespons
 					console.log('Server response:', response)
 				}
 			)
-
-			// revalidateCacheByPath(['/dashboard/reels', '/reels'])
 		} catch (e) {
 			console.log(e)
 		}

@@ -24,7 +24,7 @@ export const updateStreamingVideo = async (videoFormData: VideoFormType): Promis
 	await fetchService<IVideoResponse>(API_ENDPOINT, options)
 
 	revalidatePath('/streaming')
-	revalidatePath('/dashboard/streaming')
+	revalidatePath('/agnostic/streaming')
 }
 
 export const getStreamingVideo = async (): Promise<IVideoResponse | null> => {
@@ -89,8 +89,8 @@ export const deleteReel = async (reelId: string): Promise<void> => {
 
 	await fetchService<IReelResponse[]>(API_ENDPOINT, options)
 
-	revalidatePath('/dashboard/videos')
-	revalidatePath('/dashboard/reel')
+	revalidatePath('/agnostic/videos')
+	revalidatePath('/agnostic/reel')
 	revalidatePath('/')
 }
 
@@ -107,8 +107,8 @@ export const updateReel = async (reelFormData: ReelFormSchemaType): Promise<void
 
 	await fetchService<IVideoResponse>(API_ENDPOINT, options)
 
-	revalidatePath('/dashboard/videos')
-	revalidatePath('/dashboard/reel')
+	revalidatePath('/agnostic/videos')
+	revalidatePath('/agnostic/reel')
 	revalidatePath('/')
 }
 
@@ -125,8 +125,8 @@ export const createReel = async (reelFormData: ReelFormSchemaType): Promise<void
 
 	await fetchService<IVideoResponse>(API_ENDPOINT, options)
 
-	revalidatePath('/dashboard/videos')
-	revalidatePath('/dashboard/reel')
+	revalidatePath('/agnostic/videos')
+	revalidatePath('/agnostic/reel')
 	revalidatePath('/')
 }
 

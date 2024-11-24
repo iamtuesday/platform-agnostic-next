@@ -43,7 +43,7 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
 
 		socket.on('new_reel', () => {
 			console.log('Listen new_reel socket event')
-			revalidateCacheByPath(['/reels', '/dashboard/reels'])
+			revalidateCacheByPath(['/reels', '/agnostic/reels'])
 		})
 
 		return () => {

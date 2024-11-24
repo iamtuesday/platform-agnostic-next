@@ -5,22 +5,22 @@ import dynamicIconImports from 'lucide-react/dynamicIconImports'
 const sidebarNavItems: { title: string; href: string; icon: keyof typeof dynamicIconImports }[] = [
 	{
 		title: 'Lista de usuarios',
-		href: '/dashboard/users',
+		href: '/agnostic/users',
 		icon: 'users'
 	},
 	{
 		title: 'Streaming',
-		href: '/dashboard/streaming',
+		href: '/agnostic/streaming',
 		icon: 'radio'
 	},
 	{
 		title: 'Videos',
-		href: '/dashboard/videos',
+		href: '/agnostic/videos',
 		icon: 'video'
 	},
 	{
 		title: 'Reels',
-		href: '/dashboard/reels',
+		href: '/agnostic/reels',
 		icon: 'list-video'
 	}
 ]

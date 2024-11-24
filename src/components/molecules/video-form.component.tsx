@@ -44,7 +44,7 @@ export const VideoForm = ({ defaultVideoUrl, defaultVideoId }: VideoFormProps) =
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<TextField
 					classNames={{
-						field: 'max-h-[300px]'
+						field: 'min-h-[200px]'
 					}}
 					id="url"
 					as={Textarea}

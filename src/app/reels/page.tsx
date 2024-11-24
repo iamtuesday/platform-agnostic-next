@@ -57,8 +57,6 @@ export default async function ReelsPage() {
 
 	const videos = await getReels(params)
 
-	console.log(videos)
-
 	const mappedVideos = videos?.map(mapReelOutputToReelTable)
 
 	return (
@@ -69,10 +67,7 @@ export default async function ReelsPage() {
 
 			<Separator />
 
-			{/**
-			 * Mover a un componente del cliente para usar el socket
-			 */}
-			<main className="grid gap-4 phone:grid-cols-[repeat(auto-fill,minmax(256px,1fr))]">
+			<main className="grid gap-4 phone:grid-cols-4">
 				{mappedVideos?.map(video => {
 					return <ReelCard key={video.id} reel={video} />
 				})}
