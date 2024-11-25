@@ -7,9 +7,10 @@ import Image from 'next/image'
 export default async function StreamingPage() {
 	const video = await getStreamingVideo()
 
-	const iframeUrlFormat = video?.url
-		? video.url
-		: `<iframe src="https://player.vimeo.com/video/1029393916?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" title="Presentación Pottencia"></iframe>`
+	const iframeUrlFormat = video?.url ? video.url : '<iframe></iframe>'
+	const sanitizedIframe = iframeUrlFormat
+		.replace(/style="[^"]*"/gi, '')
+		.replace(/<iframe/gi, `<iframe className="aspect-video h-full w-full"`)
 
 	return (
 		<div className="relative flex flex-col bg-black pb-16">
@@ -41,7 +42,7 @@ export default async function StreamingPage() {
 				</header>
 
 				<section className="overflow-hidden rounded-lg bg-black shadow-lg">
-					<Mdx>{iframeUrlFormat.replace(/<iframe/gi, `<iframe className="aspect-video h-full w-full"`)}</Mdx>
+					<Mdx>{sanitizedIframe}</Mdx>
 				</section>
 			</main>
 		</div>

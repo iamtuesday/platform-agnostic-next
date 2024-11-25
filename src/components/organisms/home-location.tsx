@@ -18,9 +18,9 @@ export const HomeLocation = () => {
 						className={cn(
 							'bg-gradient-to-t from-[#B28AF2] to-[#3B1FA5] bg-clip-text text-center font-bold text-transparent'
 						)}
-						size="6xl"
+						size="5xl"
 					>
-						Mapa del Evento
+						Mapa CDMX - Papalote Museo del Niño
 					</Typography>
 				</header>
 
@@ -55,8 +55,8 @@ export const HomeLocation = () => {
 						<Image
 							src={imageUrl}
 							alt="Imagen de ejemplo"
-							width={1600}
-							height={900}
+							width={2000}
+							height={1300}
 							className="aspect-[261/139] h-auto w-full cursor-pointer object-cover"
 						/>
 					</PhotoView>
