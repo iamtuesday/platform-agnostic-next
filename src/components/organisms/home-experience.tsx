@@ -21,10 +21,10 @@ export default function HomeExperience() {
 			<section className="space-y-4">
 				<header className="space-y-4">
 					<Typography as="h2" className={cn('text-[#333333]')} size="5xl" weight="bold">
-						Como se esta viviendo el Potencia
+						Cómo se está viviendo PottencIA
 					</Typography>
 					<Typography as="p" className={cn('text-[#888888]')} size="2xl" weight="medium">
-						Vive de cerca la experiencia Potencia con IA
+						Vive de cerca la experiencia PottencIA con IA
 					</Typography>
 				</header>
 
