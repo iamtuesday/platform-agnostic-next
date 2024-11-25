@@ -10,6 +10,7 @@ import { toast } from 'sonner'
 import { TextField, Typography } from '../molecules'
 import { Form } from '../ui'
 import { Button } from '../ui/button'
+import { RevokeSessionsDialog } from './revoked-session-dialog'
 
 export const SignInForm = () => {
 	const form = useForm<SignInFormType>({
@@ -41,7 +42,7 @@ export const SignInForm = () => {
 							label="Email"
 							control={control}
 							name="email"
-							placeholder="Enter your email address"
+							placeholder="Ingrese su email"
 							icon={<AtSign size={18} />}
 						/>
 					</div>
@@ -50,7 +51,7 @@ export const SignInForm = () => {
 						Sign in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
 					</Button>
 
-					<div className="mt-8 text-center text-sm text-gray-600">
+					<footer className="mt-8 flex flex-col items-center gap-4">
 						{/* {"Don't have an account?"}{' '}
 						<Link href="/signup" className="text-blue-600 hover:underline">
 							Create one here
@@ -60,7 +61,9 @@ export const SignInForm = () => {
 							Sólo si estás registrado en la página podrás acceder a ella, si no, por favor contacta con los
 							administradores.
 						</Typography>
-					</div>
+
+						<RevokeSessionsDialog />
+					</footer>
 				</div>
 			</form>
 		</Form>

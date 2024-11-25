@@ -20,6 +20,20 @@ type errorMsgType = {
 	msg: string
 }
 
+export const revokeSessions = async (data: SignInFormType): Promise<void> => {
+	const API_ENDPOINT = '/authentication/revoked-tokens'
+
+	const options: FetchOptions = {
+		method: 'POST',
+		body: JSON.stringify(data),
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	}
+
+	await fetchService<IAuthResponse>(API_ENDPOINT, options)
+}
+
 export const login = async (signInData: SignInFormType): Promise<errorMsgType | void> => {
 	const API_ENDPOINT = '/authentication/login'
 
