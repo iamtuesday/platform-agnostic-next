@@ -30,7 +30,7 @@ export default function HomeExperience() {
 
 				<footer className="inline-block">
 					<Link href="/reels" className={cn(buttonVariants({ size: 'lg' }), 'bg-foreground/50 text-base')}>
-						Videos Feed
+						Videos reels
 					</Link>
 				</footer>
 			</section>
