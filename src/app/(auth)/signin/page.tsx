@@ -10,7 +10,7 @@ export default function LoginPage() {
 					<PottenciaLogo />
 				</header>
 
-				<section className="flex h-full w-full flex-col items-center gap-4">
+				<section className="mt-6 flex h-full w-full flex-col items-center gap-4">
 					<SignInForm />
 					<RevokeSessionsDialog />
 				</section>
