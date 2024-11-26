@@ -4,182 +4,357 @@ import { cn } from '@/lib/utils'
 import AutoHeight from 'embla-carousel-auto-height'
 import { Download } from 'lucide-react'
 import { motion } from 'motion/react'
+import Image from 'next/image'
 import { AnimatedTitle, Typography } from '../molecules'
 import { buttonVariants, Carousel, CarouselContent, CarouselDotsButton, CarouselItem } from '../ui'
-
-const schedules = [
+const schedules: {
+	title: string
+	schedules: {
+		id: string
+		schedule: string
+		title: string
+		description?: string
+		iconUrl?: string
+		imgSizes?: string
+	}[]
+	additionalWorkshops?: {
+		room: string
+		schedules: {
+			id: string
+			imgSizes?: string
+			schedule: string
+			title: string
+			iconUrl?: string
+			description?: string
+		}[]
+	}[]
+}[] = [
 	{
-		title: '26 Noviembre - Saltillo (UANE, Campus Saltillo)',
+		title: 'Saltillo',
 		schedules: [
 			{
 				id: '1',
-				schedule: '8:30 AM - 9:00 AM',
+				schedule: '8:30 – 9:00',
 				title: 'Ceremonia de inauguración',
-				description:
-					'**Empresas participantes en stands:** General Motors México, Danfoss, Grupo Alfa, Magna Internacional, Yanfeng, Santander, Pearson, Suárez Zavala Soluciones Industriales y Servicio Nacional de Empleo.'
+				description: ''
 			},
 			{
 				id: '2',
-				schedule: '9:00 AM - 10:00 AM',
+				schedule: '9:00 – 10:00',
 				title: 'Conferencia magistral de inicio',
-				description:
-					'**Tema:** IA responsable: principios y prácticas en el desarrollo tecnológico. **Impartida por:** Lauro García, Head of Education para LATAM en Google Cloud.'
+				description: 'IA responsable: Principios y prácticas en el desarrollo tecnológico',
+				iconUrl: '/assets/google.png'
 			},
 			{
 				id: '3',
-				schedule: '10:30 AM - 11:30 AM',
+				schedule: '10:30 – 11:30',
 				title: 'Panel de discusión en Ciencias Jurídicas',
-				description:
-					'**Tema:** IA y justicia: Aplicaciones en el Sistema Judicial y sus implicaciones. **Moderado por:** Universidad Cooperativa de Colombia y Tribunal de Justicia Administrativa de Coahuila.'
+				description: 'IA y justicia: Aplicaciones en el Sistema Judicial y sus implicaciones'
 			},
 			{
 				id: '4',
-				schedule: '11:00 AM - 11:40 AM',
+				schedule: '11:00 – 11:40',
 				title: 'Taller',
-				description:
-					'**Tema:** Navegando el aprendizaje en la Era Digital: Estrategias y herramientas para estudiantes. **Impartido por:** Bedu.'
+				description: 'Navegando el aprendizaje en la Era Digital: Estrategias y herramientas para estudiantes'
 			},
 			{
 				id: '5',
-				schedule: '12:00 PM - 12:40 PM',
+				schedule: '12:00 – 12:40',
 				title: 'Taller',
-				description:
-					'**Tema:** Creación de contenidos con IA: Potencia tu presencia en RRSS. **Impartido por:** Daniel Ordaz, CEO de Sendos.ai.'
+				description: 'Creación de contenidos con IA: Potencia tu presencia en RRSS'
 			},
 			{
 				id: '6',
-				schedule: '6:00 PM - 7:00 PM',
+				schedule: '18:00 – 19:00',
 				title: 'Panel de discusión en Ciencias Sociales',
-				description:
-					'**Tema:** IA y el Futuro del Trabajo: Transformaciones y Desafíos Laborales. **Participación de:** Lottus Education y expertos en liderazgo profesional.'
+				description: 'IA y el Futuro del Trabajo: Transformaciones y Desafíos Laborales'
 			},
 			{
 				id: '7',
-				schedule: '7:00 PM - 7:30 PM',
+				schedule: '18:50 – 19:30',
 				title: 'Taller',
-				description:
-					'**Tema:** El profesional del mañana: Cómo prepararte para un futuro con IA. **Impartido por:** UANE.'
+				description: 'El profesional del mañana: Cómo prepararte para un futuro con IA'
 			},
 			{
 				id: '8',
-				schedule: '7:30 PM - 8:30 PM',
+				schedule: '19:30 – 20:30',
 				title: 'Conferencia magistral de cierre',
-				description:
-					'**Tema:** Potencia tus proyectos con la nube: IA y Machine Learning al alcance de todos. **Impartido por:** José Lorenzo Cuencar, Sr. Solutions Architect en AWS.'
+				description: 'Potencia tus proyectos con la nube: IA y Machine Learning al alcance de todos',
+				iconUrl: '/assets/aws.png'
+			},
+			{
+				id: '9',
+				schedule: '21:00',
+				title: 'Fiesta Neón',
+				description: ''
 			}
-		]
+		],
+		additionalWorkshops: []
 	},
 	{
-		title: '27 Noviembre - Guadalajara (Palcco)',
+		title: 'Guadalajara',
 		schedules: [
 			{
 				id: '1',
-				schedule: '8:30 AM - 9:00 AM',
+				schedule: '8:30 – 9:00',
 				title: 'Ceremonia de inauguración',
-				description:
-					'**Empresas participantes en stands:** Intel Guadalajara Design Center, Continental Automotive Guadalajara, HP Inc., BYD, Grupo Salinas, Santander y Talent + UTEG.'
+				description: ''
 			},
 			{
 				id: '2',
-				schedule: '9:00 AM - 10:00 AM',
-				title: 'Conferencia magistral de inicio',
-				description:
-					'**Tema:** El impacto de la IA en la transformación digital de las organizaciones. **Impartida por:** Alfonso Sandoval, Especialista de Azure en Microsoft.'
+				schedule: '9:00 – 10:00',
+				title: 'Conferencia Magistral de inicio',
+				description: 'Inteligencia artificial aplicada: Transformando industrias con soluciones de AWS',
+				iconUrl: '/assets/aws.png'
 			},
 			{
 				id: '3',
-				schedule: '10:30 AM - 11:30 AM',
+				schedule: '10:00 – 11:00',
 				title: 'Panel de discusión en Diseño y Arquitectura',
-				description:
-					'**Tema:** Simulación y Modelado en Arquitectura con IA. **Participación de:** Universidad de las Américas Puebla e IXA IA.'
+				description: 'Simulación y Modelado en tiempo real: Simulación ambiental de proyectos arquitectónicos'
 			},
 			{
 				id: '4',
-				schedule: '11:00 AM - 11:40 AM',
-				title: 'Taller',
-				description:
-					'**Tema:** Creación de contenidos con IA: Potencia tu presencia en RRSS. **Impartido por:** Daniel Ordaz, CEO de Sendos.ai.'
+				schedule: '11:00 – 11:40',
+				title: 'Ponencia corta',
+				description: 'Redes sociales y seguridad Digital: Protección de la identidad en la era IA'
 			},
 			{
 				id: '5',
-				schedule: '12:00 PM - 12:40 PM',
-				title: 'Taller',
-				description:
-					'**Tema:** Potencia tus proyectos con la nube: IA y Machine Learning al alcance de todos. **Impartido por:** AWS.'
+				schedule: '12:00 – 12:40',
+				title: 'Ponencia corta',
+				description: 'IA para el conocimiento de patrones cancerosos en imágenes médicas'
 			},
 			{
 				id: '6',
-				schedule: '3:00 PM - 4:00 PM',
-				title: 'Panel de discusión en Diseño y Tecnología',
-				description:
-					'**Tema:** IA y el Futuro del Diseño: Nuevas oportunidades con IA. **Participación de:** Oracle y expertos en innovación.'
+				schedule: '14:00 – 14:40',
+				title: 'Ponencia corta',
+				description: 'Herramientas de Machine Learning en la industria'
 			},
 			{
 				id: '7',
-				schedule: '4:00 PM - 5:00 PM',
+				schedule: '15:00 – 16:00',
+				title: 'Panel de discusión en Negocios y empresariales',
+				description: 'IA y la transformación Digital de las Organizaciones: Nuevos Modelos de Negocio'
+			},
+			{
+				id: '8',
+				schedule: '16:00 – 17:00',
 				title: 'Conferencia Magistral de cierre',
-				description:
-					'**Tema:** Seguridad en la Era de la IA: Desafíos y soluciones en infraestructuras de red. **Impartida por:** Fabiola Olvera, Systems Engineer en CISCO.'
+				description: 'Soluciones de Oracle Cloud para mejorar la cadena de suministro y RRHH con el uso de la IA',
+				iconUrl: '/assets/oracle.png',
+				imgSizes: 'h-[20px] w-auto'
+			},
+			{
+				id: '9',
+				schedule: '21:00',
+				title: 'Fiesta Neón',
+				description: ''
+			}
+		],
+		additionalWorkshops: [
+			{
+				room: 'SALA VELARIA',
+				schedules: [
+					{
+						id: '1',
+						schedule: '11:00 – 12:00',
+						title: 'Ponencia corta',
+						description: 'Innovando desde el aula'
+					},
+					{
+						id: '1',
+						schedule: '12:00 – 13:00',
+						title: 'Torneo de videojuegos',
+						description: 'Smash Bros y Mario Kart'
+					},
+					{
+						id: '1',
+						schedule: '13:00 – 14:00',
+						title: 'Torneo de videojuegos',
+						description: 'Smash Bros y Mario Kart'
+					},
+					{
+						id: '1',
+						schedule: '14:00 – 15:00',
+						title: 'Torneo de videojuegos',
+						description: 'Smash Bros y Mario Kart'
+					}
+				]
+			},
+			{
+				room: 'SALON PRELUDIO',
+				schedules: [
+					{
+						id: '1',
+						schedule: '11:00 – 12:00',
+						title: 'Taller',
+						description: 'IA en la toma de decisiones estratégicas'
+					},
+					{
+						id: '1',
+
+						schedule: '12:00 – 13:00',
+						title: 'Taller',
+						description: 'Creación de contenidos con AI: Potencia tu presencia en RRSS'
+					},
+					{
+						id: '1',
+						schedule: '13:00 – 14:00',
+						title: 'Taller',
+						description: 'El futuro... Los estudiantes vs Inteligencia Artificial'
+					},
+					{
+						id: '1',
+						schedule: '14:00 – 15:00',
+						title: 'Taller',
+						description: 'IA para Marketing y Análisis de Clientes'
+					}
+				]
+			},
+			{
+				room: 'TERRAZA ORIENTE',
+				schedules: [
+					{
+						id: '1',
+
+						schedule: '11:00 – 12:00',
+						title: 'Taller',
+						description: 'Transforma tu Futuro: Ciudadanía Creativa y Responsable en la Era de la IA',
+						iconUrl: '/assets/pearson.png'
+					},
+					{
+						id: '1',
+
+						schedule: '12:00 – 13:00',
+						title: 'Taller',
+						description: 'Integración de modelos de lenguaje de gran escala en Aplicaciones de Software'
+					},
+					{
+						id: '1',
+
+						schedule: '13:00 – 14:00',
+						title: 'Taller',
+						description: 'Inteligencia Artificial en los Sistemas de Gestión'
+					},
+					{
+						id: '1',
+
+						schedule: '14:00 – 15:00',
+						title: 'Taller',
+						description: 'IXA Design Lab: Innovando con IA'
+					}
+				]
+			},
+			{
+				room: 'SALÓN INTERMEZZO',
+				schedules: [
+					{
+						id: '1',
+
+						schedule: '11:00 – 12:00',
+						title: 'Taller',
+						description: 'Seguridad en la era de la IA: Desafíos y soluciones en infraestructuras de red',
+						iconUrl: '/assets/cisco.png'
+					},
+					{
+						id: '1',
+
+						schedule: '12:00 – 13:00',
+						title: 'Taller',
+						description: 'Implicaciones legales y estratégicas de la IA en seguridad y redes'
+					},
+					{
+						id: '1',
+
+						schedule: '13:00 – 14:00',
+						title: 'Taller',
+						description: 'El profesional del mañana: Cómo prepararte para un futuro con IA'
+					},
+					{
+						id: '1',
+
+						schedule: '14:00 – 15:00',
+						title: 'Taller',
+						description: 'IA: Optimización de Tiempo en Proyectos'
+					}
+				]
 			}
 		]
 	},
 	{
-		title: '28 Noviembre - Ciudad de México (Papalote Museo del Niño)',
+		title: 'CDMX',
 		schedules: [
 			{
 				id: '1',
-				schedule: '8:30 AM - 9:00 AM',
+				schedule: '9:00 – 9:30',
 				title: 'Ceremonia de inauguración',
-				description:
-					'**Empresas participantes en stands:** Microsoft México, IBM México, KIO Networks, Grupo Fórmula, Alto México, Pearson, Bedu y Santander Universia.'
+				description: ''
 			},
 			{
 				id: '2',
-				schedule: '9:00 AM - 10:00 AM',
-				title: 'Conferencia magistral de inicio',
-				description: '**Tema:** IA en Acción: Cómo la IA mejora nuestra vida cotidiana. **Impartido por:** Google.'
+				schedule: '9:30 – 10:30',
+				title: 'Conferencia Magistral de inicio',
+				description: 'Conectividad inteligente: Cómo la IA revoluciona las telecomunicaciones',
+				iconUrl: '/assets/fundacion-movistar.png'
 			},
 			{
 				id: '3',
-				schedule: '10:00 AM - 11:00 AM',
-				title: 'Presentación de proyectos finales',
-				description: '**Evento:** Competición DesafÍA by PottencIA.'
+				schedule: '10:30 – 11:30',
+				title: 'Presentación proyectos finales',
+				description: 'Presentación de proyectos Competición DESAFÍA BY POTTENCIA'
 			},
 			{
 				id: '4',
-				schedule: '11:00 AM - 11:40 AM',
+				schedule: '11:30 – 12:30',
+				title: 'Panel de discusión en Ciencias de la Salud',
+				description: 'Predicción de Enfermedades con IA de la Prevención a la Intervención Temprana'
+			},
+			{
+				id: '14',
+				schedule: '12:30 – 13:30',
 				title: 'Taller',
-				description:
-					'**Tema:** Predicción de Enfermedades con IA: De la Prevención a la Intervención. **Impartido por:** Neuron Health y SofIWellness.'
+				description: 'Navegando el aprendizaje en la Era Digital'
 			},
 			{
 				id: '5',
-				schedule: '12:00 PM - 12:40 PM',
-				title: 'Panel de discusión en Tecnología y Robótica',
-				description:
-					'**Tema:** Inteligencia Artificial y Robótica: La Próxima Revolución Industrial. **Moderado por:** Grupo Salinas.'
+				schedule: '13:30 – 14:30',
+				title: 'Taller',
+				description: 'Secretos para el éxito digital: El ERP y la Inteligencia Artificial'
+			},
+			{
+				id: '10',
+				schedule: '14:30 – 15:30',
+				title: 'Taller',
+				description: 'El impacto de la IA en el futuro de la empleabilidad'
 			},
 			{
 				id: '6',
-				schedule: '3:00 PM - 3:40 PM',
-				title: 'Taller',
-				description:
-					'**Tema:** El profesional del mañana: Cómo prepararte para un futuro con IA. **Impartido por:** Microsoft.'
+				schedule: '16:30 – 17:30',
+				title: 'Panel de discusión en Ingenierías',
+				description: 'Inteligencia Artificial y Robótica: La Próxima Revolución Industrial'
 			},
 			{
 				id: '7',
-				schedule: '5:00 PM - 5:30 PM',
+				schedule: '18:00 – 18:30',
 				title: 'Premiación',
-				description: '**Evento:** Premiación de los ganadores del concurso DesafÍA.'
+				description: 'Ganadores Competición DESAFÍA BY POTTENCIA (asistencia presencial ganadores)'
+			},
+			{
+				id: '9',
+				schedule: '18:30 - 19:30',
+				title: 'Conferencia Magistral de cierre',
+				description: 'IA en el trabajo: herramientas y habilidades para el profesional del futuro',
+				iconUrl: '/assets/microsoft.png'
 			},
 			{
 				id: '8',
-				schedule: '5:30 PM - 6:30 PM',
-				title: 'Conferencia magistral de cierre',
-				description:
-					'**Tema:** IA y el Trabajo: Herramientas y Habilidades para el Futuro. **Impartido por:** Microsoft.'
+				schedule: '19:30 – 20:30',
+				title: 'Concurso DJ´s',
+				description: ''
 			}
-		]
+		],
+		additionalWorkshops: []
 	}
 ]
 
@@ -223,15 +398,19 @@ export function HomeSchedules() {
 					<CarouselDotsButton />
 					<CarouselContent className="m-0 items-start [transition:height_0.2s;]">
 						{schedules.map(schedule => {
+							const EXIST_ADITIONAL_WORKSHOPS =
+								Array.isArray(schedule.additionalWorkshops) && schedule.additionalWorkshops.length > 0
+
 							return (
 								<CarouselItem key={schedule.title}>
 									<section className="flex flex-col gap-16">
 										<AnimatedTitle title={schedule.title} />
 
 										{schedule.schedules.map((scheduleItem, index) => {
+											const { id, schedule, title, description } = scheduleItem
 											return (
 												<motion.div
-													key={scheduleItem.id}
+													key={id}
 													variants={fadeInUpAnimationVariants}
 													custom={index}
 													viewport={{
@@ -244,12 +423,12 @@ export function HomeSchedules() {
 													)}
 												>
 													<Typography as="p" className="text-white" size="3xl" weight="bold">
-														{scheduleItem.schedule}
+														{schedule}
 													</Typography>
 
-													<div className="space-y-1 laptop:space-y-2">
+													<div className="space-y-2 laptop:space-y-3">
 														<Typography as="p" className="uppercase text-white" size="2xl" weight="semibold">
-															{scheduleItem.title}
+															{title}
 														</Typography>
 														<Typography
 															type="md"
@@ -257,13 +436,93 @@ export function HomeSchedules() {
 															weight="medium"
 															size="base"
 														>
-															{scheduleItem.description}
+															{description}
 														</Typography>
+
+														{scheduleItem.iconUrl ? (
+															<figure>
+																<Image
+																	className={scheduleItem.imgSizes ? scheduleItem.imgSizes : 'h-[40px] w-auto'}
+																	src={scheduleItem.iconUrl}
+																	width={300}
+																	height={100}
+																	alt="Logo de compañia"
+																/>
+															</figure>
+														) : null}
 													</div>
 												</motion.div>
 											)
 										})}
 									</section>
+
+									{EXIST_ADITIONAL_WORKSHOPS ? (
+										<section className="mt-16 flex flex-col gap-16">
+											<Typography size="3xl" className="font-clash-grotesk text-white">
+												TALLERES ADICIONALES
+											</Typography>
+
+											{schedule?.additionalWorkshops?.map(workShoop => {
+												const { room, schedules } = workShoop
+												return (
+													<section key={workShoop.room} className="flex flex-col gap-16">
+														<Typography size="2xl" weight="semibold" className="font-clash-grotesk text-white">
+															{room}
+														</Typography>
+
+														{schedules.map((scheduleItem, index) => {
+															const { schedule, title, id, description } = scheduleItem
+															return (
+																<motion.div
+																	key={id}
+																	variants={fadeInUpAnimationVariants}
+																	custom={index}
+																	viewport={{
+																		once: true
+																	}}
+																	initial="initial"
+																	whileInView="animate"
+																	className={cn(
+																		'grid grid-cols-1 items-center gap-y-4 laptop:grid-cols-[360px_auto] laptop:px-20'
+																	)}
+																>
+																	<Typography as="p" className="text-white" size="3xl" weight="bold">
+																		{schedule}
+																	</Typography>
+
+																	<div className="space-y-2 laptop:space-y-3">
+																		<Typography as="p" className="uppercase text-white" size="2xl" weight="semibold">
+																			{title}
+																		</Typography>
+																		<Typography
+																			type="md"
+																			className="font-plus-jakarta uppercase text-white"
+																			weight="medium"
+																			size="base"
+																		>
+																			{description}
+																		</Typography>
+
+																		{scheduleItem.iconUrl ? (
+																			<figure>
+																				<Image
+																					className={scheduleItem.imgSizes ? scheduleItem.imgSizes : 'h-[40px] w-auto'}
+																					src={scheduleItem.iconUrl}
+																					width={300}
+																					height={100}
+																					alt="Logo de compañia"
+																				/>
+																			</figure>
+																		) : null}
+																	</div>
+																</motion.div>
+															)
+														})}
+													</section>
+												)
+											})}
+										</section>
+									) : null}
 								</CarouselItem>
 							)
 						})}

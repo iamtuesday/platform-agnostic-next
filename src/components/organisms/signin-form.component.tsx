@@ -33,7 +33,7 @@ export const SignInForm = () => {
 	return (
 		<Form {...form}>
 			<form onSubmit={handleSubmit(onSubmit)} className="w-full">
-				<div className="flex-1 rounded-lg bg-gray-50 px-6 py-16">
+				<div className="flex-1 rounded-lg bg-gray-50 px-6">
 					<h1 className={`${lusitana.className} mb-3 text-2xl`}>Inicie sesión para continuar.</h1>
 					<div className="w-full space-y-4">
 						<TextField
