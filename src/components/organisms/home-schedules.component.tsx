@@ -15,11 +15,13 @@ const schedules: {
 		title: string
 		description?: string
 		iconUrl?: string
+		imgSizes?: string
 	}[]
 	additionalWorkshops?: {
 		room: string
 		schedules: {
 			id: string
+			imgSizes?: string
 			schedule: string
 			title: string
 			iconUrl?: string
@@ -140,7 +142,8 @@ const schedules: {
 				schedule: '16:00 – 17:00',
 				title: 'Conferencia Magistral de cierre',
 				description: 'Soluciones de Oracle Cloud para mejorar la cadena de suministro y RRHH con el uso de la IA',
-				iconUrl: '/assets/oracle.png'
+				iconUrl: '/assets/oracle.png',
+				imgSizes: 'h-[20px] w-auto'
 			},
 			{
 				id: '9',
@@ -439,7 +442,7 @@ export function HomeSchedules() {
 														{scheduleItem.iconUrl ? (
 															<figure>
 																<Image
-																	className="h-[40px] w-auto"
+																	className={scheduleItem.imgSizes ? scheduleItem.imgSizes : 'h-[40px] w-auto'}
 																	src={scheduleItem.iconUrl}
 																	width={300}
 																	height={100}
@@ -503,7 +506,7 @@ export function HomeSchedules() {
 																		{scheduleItem.iconUrl ? (
 																			<figure>
 																				<Image
-																					className="h-[40px] w-auto"
+																					className={scheduleItem.imgSizes ? scheduleItem.imgSizes : 'h-[40px] w-auto'}
 																					src={scheduleItem.iconUrl}
 																					width={300}
 																					height={100}
