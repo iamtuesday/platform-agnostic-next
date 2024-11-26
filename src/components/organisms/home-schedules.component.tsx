@@ -30,7 +30,7 @@ const schedules: {
 	}[]
 }[] = [
 	{
-		title: 'Saltillo',
+		title: '26 Noviembre - Saltillo (UANE, Campus Saltillo)',
 		schedules: [
 			{
 				id: '1',
@@ -92,7 +92,7 @@ const schedules: {
 		additionalWorkshops: []
 	},
 	{
-		title: 'Guadalajara',
+		title: '27 Noviembre - Guadalajara (Palcco)',
 		schedules: [
 			{
 				id: '1',
@@ -283,7 +283,7 @@ const schedules: {
 		]
 	},
 	{
-		title: 'CDMX',
+		title: '28 Noviembre - Ciudad de México (Papalote Museo del Niño)',
 		schedules: [
 			{
 				id: '1',
