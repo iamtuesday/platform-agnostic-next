@@ -402,7 +402,7 @@ export function HomeSchedules() {
 								Array.isArray(schedule.additionalWorkshops) && schedule.additionalWorkshops.length > 0
 
 							return (
-								<CarouselItem key={schedule.title}>
+								<CarouselItem key={`schedule-${schedule.title}`}>
 									<section className="flex flex-col gap-16">
 										<AnimatedTitle title={schedule.title} />
 
@@ -410,7 +410,7 @@ export function HomeSchedules() {
 											const { id, schedule, title, description } = scheduleItem
 											return (
 												<motion.div
-													key={id}
+													key={`schedule-${id}`}
 													variants={fadeInUpAnimationVariants}
 													custom={index}
 													viewport={{
