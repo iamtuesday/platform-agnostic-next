@@ -5,12 +5,12 @@ import { RevokeSessionsDialog } from '@/components/organisms/revoked-session-dia
 export default function LoginPage() {
 	return (
 		<main className="flex items-center justify-center md:h-screen">
-			<div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-6 p-4">
+			<div className="relative mx-auto flex w-full max-w-[400px] flex-col p-4">
 				<header className="grid h-20 w-full place-content-center rounded-lg bg-primary p-3 md:h-36">
 					<PottenciaLogo />
 				</header>
 
-				<section className="flex h-full w-full flex-col items-center gap-4">
+				<section className="flex h-full w-full flex-col items-center gap-4 py-12">
 					<SignInForm />
 					<RevokeSessionsDialog />
 				</section>
