@@ -67,6 +67,12 @@ export const logout = async (): Promise<errorMsgType | void> => {
 
 	const session = await getSession()
 
+	if (!session || !session.userId) {
+		deleteSession()
+
+		redirect('/signin')
+	}
+
 	const options: FetchOptions = {
 		method: 'POST',
 		body: JSON.stringify({
@@ -90,19 +96,17 @@ export const logout = async (): Promise<errorMsgType | void> => {
 	redirect('/')
 }
 
-export const verifyToken = async (): Promise<boolean> => {
-	const session = await getSession()
+export const verifyToken = async (session: Session | null): Promise<boolean> => {
+	if (!session || !session.userId) return false
 
-	if (!session?.userId) return false
-
-	const API_ENDPOINT = `/authentication/verify/${session?.userId}`
+	const API_ENDPOINT = `/authentication/verify/${session.userId}`
 
 	const options: FetchOptions = {
 		method: 'GET',
 		token: session?.token
 	}
 
-	const [existToken, error] = await fetchService<string>(API_ENDPOINT, options)
+	const [existToken] = await fetchService<string>(API_ENDPOINT, options)
 
 	/**
 	 * Si hay un error al verificar el token, eliminar la sesión
